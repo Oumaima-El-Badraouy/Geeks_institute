@@ -2,8 +2,9 @@
 from itertools import count
 from numpy import power
 
-
-print("Hello World")
+for i in range(1,5):
+    print("Hello World")
+    
 # Exercise 2 : Some Math
 num=power(99,3)*8
 print(num)
