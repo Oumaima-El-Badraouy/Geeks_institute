@@ -1,5 +1,6 @@
 import random
-#   Exercise 1 : Convert lists into dictionaries
+#   Exercise 1 : 
+# Convert the following lists into a dictionary using zip.
 keys = ['Ten', 'Twenty', 'Thirty']
 values = [10, 20, 30]
 result =dict(zip(keys,values))
