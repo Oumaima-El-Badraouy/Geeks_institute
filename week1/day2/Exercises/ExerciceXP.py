@@ -1,3 +1,4 @@
+import random
 #   Exercise 1 : Convert lists into dictionaries
 keys = ['Ten', 'Twenty', 'Thirty']
 values = [10, 20, 30]
@@ -83,10 +84,10 @@ describe_city("Rabat")
 def Random_numbers(num):
     if num > 100 :
         print ("choose a number between 1 and 100")
-    number_rand= range(1,101)
+    number_rand= random.randint(1,101)
     if number_rand==num :
         print('nadi jbtiha las9a')
-        number_rand= range(1,101)
+        number_rand= random.randint(1,101)
     else:
         print("3yan 3yan 3awd")
 Random_numbers(2)
