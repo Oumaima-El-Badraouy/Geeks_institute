@@ -113,9 +113,13 @@ class Zoo:
         groups = {}
         for animal in self.animals:
             key = animal[0].upper()
-            if key not in groups:
-                groups[key] = []
-            groups[key].append(animal)
+            groups.setdefault(key, []).append(animal)
+
+        # Convert single-item lists to strings
+        for key in groups:
+            if len(groups[key]) == 1:
+                groups[key] = groups[key][0]
+
         return groups
         
 
