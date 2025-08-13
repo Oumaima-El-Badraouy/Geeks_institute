@@ -93,8 +93,7 @@ class Zoo:
     def add_animal(self, new_animal):
         if new_animal not in self.animals:
             self.animals.append(new_animal)
-        else :
-            return None
+        
     # qst4
     def get_animals(self):
         return self.animals
@@ -102,11 +101,11 @@ class Zoo:
     # qst5
     def sell_animal (self,animal_sold):
           if animal_sold  in self.animals:
-                animal_sold=self.animals.remove(animal_sold)
+                self.animals.remove(animal_sold)
+                return animal_sold
 
-          else:
-              return None
-          return animal_sold
+          
+          return None
     # qst6
     def sort_animals(self):
         self.animals.sort()
