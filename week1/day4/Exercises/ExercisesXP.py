@@ -27,8 +27,8 @@ class Chartreux(Cat):
         return f'{sounds}'
 class Siamese(Cat):
   pass
-object1 = Pets([Bengal("Bengal", 2), Chartreux("Chartreux", 3), Siamese("Siamese", 1)])
-for i in object1.animals:
+sara_pets = Pets([Bengal("Bengal", 2), Chartreux("Chartreux", 3), Siamese("Siamese", 1)])
+for i in sara_pets.animals:
     print(i.walk())
         
         

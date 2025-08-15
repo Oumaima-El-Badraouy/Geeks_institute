@@ -51,3 +51,4 @@ print(p.current_page + 1)
 
 p.go_to_page(1)
 # Raises ValueError
+print(list(range(5)))
