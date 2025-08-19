@@ -1,7 +1,7 @@
 -- Exercise 1 : Students table #2
 /*qst1*/
 create database bootcamp;
-use bootcamp;
+
 /*qst2 and 3*/
 create table students(
 id SERIAL primary key,
