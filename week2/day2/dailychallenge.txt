@@ -1,0 +1,15 @@
+Daily challenge : SQL Puzzle
+Questions
+
+Q1. What will be the OUTPUT of the following statement?
+raytl3 lik column ft fyh  0
+
+Q2. What will be the OUTPUT of the following statement?
+
+raytl3 lik column ft fyh  2
+
+Q3. What will be the OUTPUT of the following statement?
+raytl3 lik column ft fyh  0
+
+Q4. What will be the OUTPUT of the following statement?
+raytl3 lik column ft fyh  2
