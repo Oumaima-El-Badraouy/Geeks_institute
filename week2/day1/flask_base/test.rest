@@ -1,0 +1,13 @@
+### Gets all students
+GET http://localhost:5001/students?page=2&limit=2
+
+### Gets a student by id
+GET http://localhost:5001/students/22
+
+### Creates a student
+POST http://localhost:5001/students
+Content-Type: application/json
+
+{
+    "name": "John Doe"
+}

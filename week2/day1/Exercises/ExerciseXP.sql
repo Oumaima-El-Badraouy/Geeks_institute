@@ -1,12 +1,12 @@
 create database public;
 use public;
 create table Items(
-id SERIAL primary key,
+id integer SERIAL primary key,
 nom varchar(10),
 price decimal(10,2)
 );
 create table Costumers(
-id SERIAL primary key,
+id  integer  SERIAL primary key,
 FirstName varchar(10),
 LastName varchar(10)
 );
