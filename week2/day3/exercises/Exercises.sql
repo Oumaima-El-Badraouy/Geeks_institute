@@ -29,3 +29,75 @@ VALUES
 
 delete from new_film where id=1
 --mabrach ytms7 hit kayn ftable akhour( La clé (id)=(1) est toujours référencée à partir de la table « customer_review ».UPDATE ou DELETE sur la table « new_film » viole la contrainte de clé étrangère « customer_review_film_id_fkey » de la table « customer_review » )
+
+
+
+-- Exercise 2 : DVD Rental
+
+
+update film set language_id=2 where film_id=1
+--store_id and address_id 
+--  خاصك تحترم هاد الشروط:
+
+-- store_id اللي غادي تدخل خاصو يكون كاين من قبل فـ store.
+
+-- address_id اللي غادي تدخل خاصو يكون كاين من قبل فـ address.
+
+-- إلا ما كاينينش → PostgreSQL غادي يعطيك Foreign key violation error.
+
+
+drop table customer_review
+--easy
+
+
+select*from film f
+inner join inventory i
+   on  f.film_id=i.film_id
+inner join rental r
+   on r.inventory_id=i.inventory_id
+where r.rental_date is null
+
+SELECT f.film_id, f.title, f.rental_rate, r.rental_date, r.return_date
+FROM film f
+JOIN inventory i ON f.film_id = i.film_id
+JOIN rental r ON i.inventory_id = r.inventory_id
+WHERE r.return_date IS NULL
+ORDER BY f.rental_rate DESC
+LIMIT 30;
+
+
+select * from film f  
+inner join film_actor FA 
+   on FA.film_id=f.film_id
+inner join actor A
+ on FA.actor_id=A.actor_id and first_name||''||last_name='Penelope Monroe'
+where title= 'sumo'
+
+select * from film f
+inner join film_category C
+ on C.film_id=f.film_id 
+inner join category CA
+ on CA.category_id=C.category_id and name='Documentary'
+where rating='R' and length<=60
+
+SELECT f.title, f.description, r.rental_date, r.return_date, p.amount
+FROM rental r
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+JOIN customer c ON r.customer_id = c.customer_id
+JOIN payment p ON r.rental_id = p.rental_id
+WHERE c.first_name = 'Matthew'
+  AND c.last_name = 'Mahan'
+  AND p.amount > 4
+  AND r.return_date BETWEEN '2005-07-28' AND '2005-08-01';
+
+SELECT f.title, f.description, f.replacement_cost
+FROM film f
+JOIN inventory i ON f.film_id = i.film_id
+JOIN rental r ON i.inventory_id = r.inventory_id
+JOIN customer c ON r.customer_id = c.customer_id
+WHERE c.first_name = 'Matthew'
+  AND c.last_name = 'Mahan'
+  AND (f.title ILIKE '%boat%' OR f.description ILIKE '%boat%')
+ORDER BY f.replacement_cost DESC
+LIMIT 1;
