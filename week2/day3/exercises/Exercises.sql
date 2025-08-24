@@ -64,7 +64,7 @@ JOIN rental r ON i.inventory_id = r.inventory_id
 WHERE r.return_date IS NULL
 ORDER BY f.rental_rate DESC
 LIMIT 30;
-
+ select* from rental
 
 select * from film f  
 inner join film_actor FA 
