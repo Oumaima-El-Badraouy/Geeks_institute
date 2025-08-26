@@ -15,20 +15,20 @@ export default function Contact() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/contact', form);
-      alert("Merci pour votre message ! 🚀");
+      alert("Thank you for your message!");
     } catch (error) {
       console.error("Error sending message:", error);
-      alert("Une erreur s'est produite. Veuillez réessayer.");
+      alert("An error occurred. Please try again.");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-6">
       <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-lg">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Contactez-nous</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Contact Us</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nom complet</label>
+            <label className="block text-sm font-medium text-gray-700">Full Name</label>
             <input
               type="text"
               name="name"
@@ -36,7 +36,7 @@ export default function Contact() {
               onChange={handleChange}
               required
               className="mt-1 w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500"
-              placeholder="Votre nom"
+              placeholder="your name"
             />
           </div>
 
@@ -62,7 +62,7 @@ export default function Contact() {
               required
               rows="4"
               className="mt-1 w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500"
-              placeholder="Écrivez votre message..."
+              placeholder="Write your message..."
             />
           </div>
 
@@ -70,7 +70,7 @@ export default function Contact() {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition duration-300"
           >
-            Envoyer
+            Send
           </button>
         </form>
       </div>

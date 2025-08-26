@@ -19,6 +19,16 @@
             "database": "dvdrental",
             "username": "postgres",
             "password": "0000"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "post1",
+            "database": "Oumaima",
+            "username": "postgres",
+            "password": "0000"
         }
     ]
 }

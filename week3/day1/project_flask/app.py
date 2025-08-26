@@ -68,6 +68,7 @@ def delete_film(film_id):
     cur.close()
     conn.close()
     return redirect(url_for('films'))
+# cur.execute("TRUNCATE TABLE film RESTART IDENTITY;")
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
