@@ -34,7 +34,7 @@ def add_film():
         conn.commit()
         cur.close()
         conn.close()
-        return redirect(url_for('index'))
+        return redirect(url_for('films'))
 
     return render_template("add_film.html")
 
@@ -69,6 +69,20 @@ def delete_film(film_id):
     conn.close()
     return redirect(url_for('films'))
 # cur.execute("TRUNCATE TABLE film RESTART IDENTITY;")
+@app.route('/search', methods=["GET", "POST"])
+def search():
+    films = []
+    if request.method == "POST":
+        keyword = request.form['keyword']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT film_id, title, description FROM film WHERE title ILIKE %s",
+                    ('%' + keyword + '%',))
+        films = cur.fetchall()
+        cur.close()
+        conn.close()
+    return render_template("films.html", films=films)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
