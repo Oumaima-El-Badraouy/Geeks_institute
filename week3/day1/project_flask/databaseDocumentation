@@ -1,0 +1,92 @@
+
+# DVDRental Database Schema Documentation
+
+##  Database Overview
+
+**Database Name:** dvdrental
+**Type:** PostgreSQL
+**Purpose:** Stockage des films, clients, locations et informations liées à une vidéothèque.
+
+La base de données contient plusieurs tables, dont les principales sont :
+
+| Table Name | Description                        |
+| ---------- | ---------------------------------- |
+| film       | Informations sur les films         |
+| actor      | Informations sur les acteurs       |
+| category   | Catégories de films                |
+| customer   | Informations sur les clients       |
+| rental     | Historique des locations           |
+| payment    | Informations de paiement           |
+| staff      | Informations sur le personnel      |
+| inventory  | Inventaire des copies de films     |
+| language   | Langues disponibles pour les films |
+
+---
+
+##  Table `film` (Focus du projet)
+
+| Column Name       | Data Type    | Constraints                                    | Description                                            |
+| ----------------- | ------------ | ---------------------------------------------- | ------------------------------------------------------ |
+| film\_id          | integer      | PRIMARY KEY, SERIAL                            | Identifiant unique du film                             |
+| title             | varchar(255) | NOT NULL                                       | Titre du film                                          |
+| description       | text         |                                                | Description du film                                    |
+| release\_year     | year         |                                                | Année de sortie                                        |
+| language\_id      | smallint     | NOT NULL, FOREIGN KEY → language(language\_id) | Langue du film                                         |
+| rental\_duration  | smallint     | NOT NULL, DEFAULT 3                            | Durée de location en jours                             |
+| rental\_rate      | numeric(4,2) | NOT NULL, DEFAULT 4.99                         | Prix de location                                       |
+| length            | smallint     |                                                | Durée du film en minutes                               |
+| replacement\_cost | numeric(5,2) | NOT NULL, DEFAULT 19.99                        | Coût de remplacement                                   |
+| rating            | varchar(10)  | DEFAULT 'G'                                    | Classification du film (G, PG, PG-13, R, NC-17)        |
+| special\_features | text\[]      |                                                | Fonctionnalités spéciales (ex: Trailers, Commentaries) |
+| last\_update      | timestamp    | NOT NULL, DEFAULT now()                        | Date de dernière modification                          |
+
+**Notes importantes :**
+
+* `language_id` référence la table `language`.
+* `film_id` est auto-incrémenté grâce à `SERIAL`.
+* `special_features` est un array pour stocker plusieurs options par film.
+
+---
+
+## Table `language`
+
+| Column Name  | Data Type   | Constraints             | Description                     |
+| ------------ | ----------- | ----------------------- | ------------------------------- |
+| language\_id | smallint    | PRIMARY KEY             | Identifiant unique de la langue |
+| name         | varchar(20) | NOT NULL                | Nom de la langue                |
+| last\_update | timestamp   | NOT NULL, DEFAULT now() | Date de dernière modification   |
+
+---
+
+## Relationships principales
+
+* `film.language_id` → `language.language_id` (1:1)
+* `inventory.film_id` → `film.film_id` (1\:N)
+* `rental.inventory_id` → `inventory.inventory_id` (1\:N)
+* `payment.rental_id` → `rental.rental_id` (1:1)
+* `rental.customer_id` → `customer.customer_id` (1\:N)
+
+---
+
+##  Diagramme simplifié (textuel)
+
+```
+film(film_id) ---< inventory(inventory_id) ---< rental(rental_id) ---< payment(payment_id)
+film.language_id ---> language(language_id)
+rental.customer_id ---> customer(customer_id)
+rental.staff_id ---> staff(staff_id)
+inventory.film_id ---> film(film_id)
+```
+
+---
+
+##Usage pour mon projet
+
+* **CRUD + Search** se concentre sur le **table `film`**.
+* Les champs principaux utilisés :
+
+  * `film_id` → identifiant pour Edit/Delete
+  * `title` → affichage + search
+  * `description` → affichage + edit
+  * `language_id` → par défaut 1 (anglais)
+

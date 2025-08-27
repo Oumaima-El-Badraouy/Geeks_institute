@@ -1,12 +1,13 @@
 from flask import Flask, request, render_template,redirect,url_for
+import os
 import psycopg2
 app=Flask(__name__)
 def get_db_connection():
     conn=psycopg2.connect(
-        host='localhost',
-        database='dvdrental',
-        user='postgres',
-        password='0000'
+         host=os.getenv('DB_HOST'),
+        database=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD')
     )
     return conn
 @app.route('/',methods=['GET'])
