@@ -225,4 +225,47 @@ function totalVacationCost(){
 
 
 // Exercise 7 : My Book List
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8">
+//   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//   <title>Books</title>
+// </head>
+// <body>
+//   <section id="book-list"></section>
 
+//   <script>
+//     1. Array of books
+//     const allBooks = [
+//       {
+//         title: "Harry Potter",
+//         author: "J.K. Rowling",
+//         image: "https://covers.openlibrary.org/b/id/7984916-L.jpg",
+//         alreadyRead: true
+//       },
+//       {
+//         title: "The Hobbit",
+//         author: "J.R.R. Tolkien",
+//         image: "https://covers.openlibrary.org/b/id/6979861-L.jpg",
+//         alreadyRead: false
+//       }
+//     ];
+//     const section = document.getElementById("book-list");
+//     allBooks.forEach(book => {      const bookDiv = document.createElement("div");
+//       bookDiv.style.marginBottom = "20px";
+//       const text = document.createElement("p");
+//       text.textContent = `${book.title} written by ${book.author}`;
+//       const img = document.createElement("img");
+//       img.src = book.image;
+//       img.style.width = "100px";
+//       if (book.alreadyRead) {
+//         text.style.color = "red";
+//       }
+//       bookDiv.appendChild(text);
+//       bookDiv.appendChild(img);
+//       section.appendChild(bookDiv);
+//     });
+//   </script>
+// </body>
+// </html>
