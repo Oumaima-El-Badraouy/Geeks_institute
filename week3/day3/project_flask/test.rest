@@ -1,0 +1,24 @@
+### Get all films
+GET http://127.0.0.1:5000/
+Accept: text/html
+
+###
+
+### Add a new film
+POST http://127.0.0.1:5000/add
+Content-Type: application/x-www-form-urlencoded
+
+title=New+Film&description=This+is+a+new+film
+
+###
+
+### Edit a film (replace 1 with the actual film_id you want to edit)
+POST http://127.0.0.1:5000/edit/1
+Content-Type: application/x-www-form-urlencoded
+
+title=Updated+Title&description=Updated+Description
+
+###
+
+### Delete a film (replace 1 with the actual film_id you want to delete)
+GET http://127.0.0.1:5000/delete/1

@@ -1,38 +1,60 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block content %}
 
-<main class="max-w-7xl mx-auto my-10">
-  <h1 class="text-2xl font-bold">Movies</h1>
+<main class="max-w-7xl mx-auto my-10 px-4">
+  <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Available Properties</h1>
 
-  <div class="grid grid-cols-1 mt-4 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    {% for movie in movies %}
-    <a href="/movies/{{ movie.id }}">
-      <div
-        class="bg-white border cursor-pointer group border-gray-200 rounded-md p-4 hover:shadow-md transition-all duration-300"
-      >
-        <div class="relative">
-          <img
-            src="https://picsum.photos/400/600?random={{ movie.id }}"
-            alt="{{ movie.title }}"
-            class="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-all duration-300"
-          />
-          <div
-            class="absolute flex items-center gap-1 top-2 right-2 bg-gray-600 text-white px-2 py-1 rounded-md"
-          >
-            <i class="bi bi-star-fill text-sm"></i>
-            <span>{{ movie.rating }}</span>
-          </div>
+  <!-- Search form -->
+  <form method="GET" action="/" class="flex flex-col sm:flex-row gap-3 mb-8 max-w-lg mx-auto">
+    <input
+      type="text"
+      name="q"
+      value="{{ search_query }}"
+      placeholder="Search by title or location..."
+      class="flex-1 border border-gray-300 rounded-lg p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    />
+    <button
+      type="submit"
+      class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition"
+    >
+      Search
+    </button>
+  </form>
+
+  <!-- Property grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for property in properties %}
+    <div class="relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
+      <a href="/property/{{ property.property_id }}">
+        <img
+          src="https://picsum.photos/500/350?random={{ property.property_id }}"
+          alt="{{ property.title }}"
+          class="w-full h-60 object-cover transition-transform duration-300 hover:scale-105"
+        />
+      </a>
+
+      <div class="p-5">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-1">{{ property.title }}</h2>
+
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-gray-500 text-sm">{{ property.year_built }} | {{ property.property_type }}</span>
+          <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">${{ property.price }}</span>
         </div>
-        <div class="flex items-baseline justify-between gap-4">
-          <h2 class="text-lg font-bold mt-2 line-clamp-1">{{ movie.title }}</h2>
-          <h2 class="text-sm text-gray-500 whitespace-nowrap">
-            {{ movie.year }} | {{ movie.genre }}
-          </h2>
+
+        <p class="text-gray-600 text-sm mb-2 line-clamp-3">{{ property.description }}</p>
+        <div class="text-gray-400 text-sm flex items-center gap-1">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>{{ property.location }}</span>
         </div>
-        <p class="text-gray-500 line-clamp-2">{{ movie.description }}</p>
       </div>
-    </a>
+
+      <div class="absolute top-3 left-3 bg-indigo-600 text-white px-2 py-1 rounded shadow">
+        Featured
+      </div>
+    </div>
     {% endfor %}
   </div>
+  
 </main>
 
 {% endblock %}
