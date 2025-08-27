@@ -33,6 +33,7 @@ def index():
     return render_template('index.html', properties=properties, search_query=search_query)
 
 
+
 @app.route('/property/<int:id>')
 def property_detail(id):
     conn = connect_to_db()
