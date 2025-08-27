@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block content %}
+
+<main class="max-w-7xl mx-auto my-10">
+  <h1 class="text-2xl font-bold">Movie Detail</h1>
+  <div
+    class="bg-white border cursor-pointer group border-gray-200 rounded-md p-4 hover:shadow-md transition-all duration-300"
+  >
+    <div class="relative overflow-hidden rounded-md">
+      <img
+        src="https://picsum.photos/1000/800?random={{ movie.id }}"
+        alt="{{ movie.title }}"
+        class="w-full h-96 object-cover rounded-md group-hover:scale-105 transition-all duration-300"
+      />
+      <div
+        class="absolute flex items-center gap-1 top-2 right-2 bg-gray-600 text-white px-2 py-1 rounded-md"
+      >
+        <i class="bi bi-star-fill text-sm"></i>
+        <span>{{ movie.rating }}</span>
+      </div>
+    </div>
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="text-lg font-bold mt-2 line-clamp-1">{{ movie.title }}</h2>
+      <h2 class="text-sm text-gray-500 whitespace-nowrap">
+        {{ movie.year }} | {{ movie.genre }}
+      </h2>
+    </div>
+    <p class="text-gray-500 line-clamp-2">{{ movie.description }}</p>
+    <div class="flex items-center gap-2 mt-4">
+      <a
+        href="/edit/{{ movie.id }}"
+        class="bg-gray-600 text-white px-4 py-2 rounded-md flex items-center justify-center gap-2"
+      >
+        <i class="bi bi-pencil-fill"></i>
+        Edit movie
+      </a>
+
+      <form action="/delete/{{ movie.id }}" method="post">
+        <button
+          type="submit"
+          class="bg-red-600 text-white px-4 py-2 rounded-md flex items-center justify-center gap-2"
+        >
+          <i class="bi bi-trash-fill"></i>
+          Delete movie
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}

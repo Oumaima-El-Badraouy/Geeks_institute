@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">Users
+<ul class="list">
+    <li>John</li>
+    <li>Pete</li>
+</ul>
+<ul class="list">
+    <li>David</li>
+    <li>Sarah</li>
+    <li>Dan</li>
+</ul></div>
+<script>
+    let container=document.getElementById("container");
+    console.log(container);
+    let list1=document.querySelectorAll(".list")[0].children[1];
+        let list=document.querySelectorAll(".list")[0].children[0];
+
+    list1.innerHTML="Richard";
+    console.log(list1);
+    let list2=document.querySelectorAll(".list")[1].children[1];
+    list2.remove();
+    for(let i=0;i<document.querySelectorAll(".list").length;i++){
+        let li=document.querySelectorAll(".list")[i].children[0];
+        li.innerHTML="Oumaiama";
+        
+    }
+    let lists = document.getElementsByClassName("list");
+    for (let i = 0; i < lists.length; i++) {
+        lists[i].classList.add("student_list");
+    }
+    lists[0].classList.add("university");
+    lists[0].classList.add("attendance");
+
+    container.style.backgroundColor = "lightblue";
+    container.style.padding = "20px";
+    let child=document.querySelectorAll(".list")[0].children[1];
+    child.style.display = "none";
+    list1.style.border="2px solid red";
+    document.body.style.fontSize = "20px";
+
+    let firstUlFirst = document.querySelectorAll(".list")[0].children[0];
+    let secondUlFirst = document.querySelectorAll(".list")[1].children[0];
+    alert(`Hello ${firstUlFirst.innerHTML} and ${secondUlFirst.innerHTML}`);
+
+
+</script>
+</body>
+</html>

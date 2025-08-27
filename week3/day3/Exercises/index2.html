@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="navBar">
+    <ul id="ul">
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">My Friends</a></li>
+        <li><a href="#">Messenger</a></li>
+        <li><a href="#">My Pics</a></li>
+    </ul>
+</div>
+
+<script>
+    let div =document.getElementById("navBar");
+    div.setAttribute("id", "socialNetworkNavigation");
+    let child = document.createElement("li");
+    let text = document.createTextNode("Logout");
+    child.appendChild(text);
+    div.appendChild(child);
+    let first=document.getElementById("ul").firstElementChild.textContent;
+    let second=document.getElementById("ul").lastElementChild.textContent;
+    alert(`Hello ${first} and ${second}`);
+</script>
+</body>
+</html>

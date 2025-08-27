@@ -29,6 +29,19 @@
             "database": "Oumaima",
             "username": "postgres",
             "password": "0000"
+        },
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "Movies",
+            "connectString": "postgresql://neondb_owner:npg_prkZoy65FYVJ@ep-restless-fire-adgbh8y4-pooler.c-2.us-east-1.aws.neon.tech/Movies?sslmode=require&channel_binding=require"
         }
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
