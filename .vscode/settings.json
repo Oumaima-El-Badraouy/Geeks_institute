@@ -53,6 +53,16 @@
             "driver": "PostgreSQL",
             "name": "labrary",
             "connectString": "postgresql://neondb_owner:npg_prkZoy65FYVJ@ep-restless-fire-adgbh8y4-pooler.c-2.us-east-1.aws.neon.tech/Labrary?sslmode=require&channel_binding=require"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Events",
+            "database": "Events",
+            "username": "postgres",
+            "password": "0000"
         }
     ],
     "liveServer.settings.port": 5501

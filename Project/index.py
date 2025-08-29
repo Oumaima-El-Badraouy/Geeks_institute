@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,jsonify
+import psycopg2
 from database.index import connect_to_db
 import os
 from dotenv import load_dotenv
@@ -8,16 +9,26 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     page = request.args.get('page', 1, type=int)
     per_page = 6
     offset = (page - 1) * per_page
+
     conn = connect_to_db()
     cursor = conn.cursor()
 
-    search_query = request.args.get('q', '')  
+    search_query = request.args.get('query', '')
+    if search_query:
+        cursor.execute("""
+            SELECT COUNT(*) FROM property
+            WHERE title ILIKE %s OR location ILIKE %s
+        """, ('%' + search_query + '%', '%' + search_query + '%'))
+    else:
+        cursor.execute("SELECT COUNT(*) FROM property")
     
+    total_properties = cursor.fetchone()[0]
     if search_query:
         cursor.execute("""
             SELECT * FROM property
@@ -26,11 +37,25 @@ def index():
             LIMIT %s OFFSET %s
         """, ('%' + search_query + '%', '%' + search_query + '%', per_page, offset))
     else:
-        cursor.execute("SELECT * FROM property ORDER BY property_id ASC LIMIT %s OFFSET %s", (per_page, offset))
+        cursor.execute("""
+            SELECT * FROM property
+            ORDER BY property_id ASC
+            LIMIT %s OFFSET %s
+        """, (per_page, offset))
 
     properties = cursor.fetchall()
+
     conn.close()
-    return render_template('index.html', properties=properties, search_query=search_query)
+
+    total_pages = (total_properties + per_page - 1) // per_page
+
+    return render_template(
+        'index.html',
+        properties=properties,
+        search_query=search_query,
+        page=page,
+        total_pages=total_pages
+    )
 
 
 

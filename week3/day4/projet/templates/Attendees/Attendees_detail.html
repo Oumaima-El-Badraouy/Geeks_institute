@@ -9,8 +9,8 @@
   >
     <div class="relative overflow-hidden rounded-md">
       <img
-        src="https://picsum.photos/1000/800?random={{ property[0] }}"
-        alt="{{ property[1] }}"
+        src="https://picsum.photos/1000/800?random={{ property.property_id }}"
+        alt="{{ property.title }}"
         class="w-full h-96 object-cover rounded-md group-hover:scale-105 transition-all duration-300"
       />
       <div
@@ -21,7 +21,7 @@
     </div>
 
     <div class="flex items-baseline justify-between gap-4 mt-4">
-      <h2 class="text-lg font-bold line-clamp-1">{{ property[1] }}</h2>
+      <h2 class="text-lg font-bold line-clamp-1">{{ property.title }}</h2>
       <h2 class="text-sm text-gray-500 whitespace-nowrap">
         {{ property.year_built }} | {{ property.property_type }}
       </h2>

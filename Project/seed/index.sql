@@ -59,3 +59,7 @@ INSERT INTO property_agent(property_id,agent_id) VALUES
 (1,2),(3,4),(5,6)
 ON CONFLICT DO NOTHING;
 
+
+SELECT indexname, indexdef
+FROM pg_indexes
+WHERE tablename = 'property';

@@ -13,8 +13,9 @@ def connect_to_db():
             database=os.getenv("PGDATABASE"),
             user=os.getenv("PGUSER"),
             password=os.getenv("PGPASSWORD"),
-            sslmode=os.getenv("PGSSLMODE"),
-            connection_factory=RealDictConnection,
+            sslmode=os.getenv("PGSSLMODE")
+            
+            
         )
         return conn
     except Exception as e:
