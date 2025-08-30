@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+        #container {
+          width: 400px;
+          height: 400px;
+          position: relative;
+          background: yellow;
+        }
+        #animate {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          background-color: red;
+        }
+        </style>
+    </head>
+    <body>
+        <p><button onclick="myMove()">Click Me</button></p>
+        <div id="container">
+          <div id="animate"></div>
+        </div>
+        <script>
+            let box = document.getElementById("animate");
+let container = document.getElementById("container");
+function myMove(){
+   let position =0;
+   let timer=setInterval(function(){
+    position+=1;
+    box.style.left=position+"px";
+    if(position >=350){
+        clearInterval(timer);
+    }
+   },10)
+}
+
+
+
+
+        </script>
+    </body>
+    </html>
