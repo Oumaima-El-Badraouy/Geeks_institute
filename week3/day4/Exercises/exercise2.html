@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="firstname"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lastname"><br><br>
+  <input type="submit" value="Submit" id="submit">
+</form> 
+<ul class="usersAnswer"></ul>
+<script>
+    let form=document.querySelector('form');
+    console.log(form);
+    let fname=document.getElementById('fname');
+    console.log(fname);
+    let lname=document.getElementById('lname');
+    console.log(lname);
+     let fname2=document.getElementsByName('firstname');
+    console.log(fname2);
+    let lname2=document.getElementsByName('lastname');
+    console.log(lname2);
+    let submit=document.getElementById('submit');
+    submit.addEventListener('click',function(e){
+        e.preventDefault();
+        let ul=document.getElementsByClassName('usersAnswer')[0];
+        let first=fname.value;
+        let last=lname.value;
+        let li1=document.createElement('li');
+        li1.textContent=`First Name: ${first}`;
+        let li2=document.createElement('li');
+        li2.textContent=`Last Name: ${last}`;
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+    })
+
+</script>
+</body>
+</html>

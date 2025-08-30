@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p><strong>Hello</strong> I hope you are enjoying <strong>this</strong> class. At the
+<strong>end</strong> you <strong>will</strong> be great Developers!
+<strong>Enjoy</strong> the <strong>JavaScript </strong> lessons</p>
+<script>
+    let allBoldItems;
+    function getBoldItems(){
+        let strongp=document.querySelectorAll('p strong');
+        allBoldItems=Array.from(strongp,el=>el.textContent);
+        console.log(allBoldItems);
+    }
+    getBoldItems();
+    function highlight(){
+        allBoldItems.forEach(function(item){
+            let strongs=document.querySelectorAll('strong');
+            strongs.forEach(function(strong){
+                if(strong.textContent===item){
+                    strong.style.color='blue';
+                }
+            })
+        })
+    }
+    function returnItemsToDefault(){
+        allBoldItems.forEach(function(item){
+            let strongs=document.querySelectorAll('strong');
+            strongs.forEach(function(strong){
+                if(strong.textContent===item){
+                    strong.style.color='black';
+                }
+            })
+        })
+    }
+    let p=document.querySelector('p');
+    p.addEventListener('mouseover',function(){
+        highlight();
+    })
+    p.addEventListener('mouseout',function(){
+        returnItemsToDefault();
+    })
+   
+</script>
+</body>
+</html>
+</html>
