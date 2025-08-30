@@ -36,3 +36,16 @@ button.addEventListener('click', function() {
        
 
 //  Exercise 2 : Move the box
+let box = document.getElementById("animate");
+function myMove(){
+   let position =0;
+   let timer=setInterval(function(){
+    position+=1;
+    box.style.left=position+"px";
+    if(position >=350){
+        clearInterval(timer);
+    }
+   },10)
+}
+
+
