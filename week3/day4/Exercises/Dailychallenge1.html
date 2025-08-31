@@ -14,19 +14,21 @@
         <label for="person">Someone's Name:</label><input type="text" id="person"><br>
         <label for="verb">Verb:</label><input type="text" id="verb"><br>
         <label for="place">A place:</label><input type="text" id="place"><br>
-        <button id="lib-button">Lib it!</button>
+        <button id="lib-button">Lib it!</button> 
+      
     </form>
 
     <p>Generated story: 
     <span id="story"></span>
     </p>
-
+  <button id="shufle">Shufle</button>
     <script>
-      
+     
         let btn=document.getElementById('lib-button');
+        let Shufle=document.getElementById('shufle');
         btn.addEventListener('click',function(e){
-            e.preventDefault();
-            let Noun=document.getElementById('noun').value;
+            e.preventDefault(); 
+             let Noun=document.getElementById('noun').value;
         let place=document.getElementById('place').value;
         let adjective=document.getElementById('adjective').value;
         let person=document.getElementById('person').value;
@@ -39,6 +41,26 @@
          story.innerHTML= `One day, ${person} went to ${place} with a ${adjective} ${Noun}. 
 While there, ${person} decided to ${verb} all day long. 
 It was the most ${adjective} adventure ever!`;
+        })
+
+
+
+        Shufle.addEventListener('click',function(e){
+            e.preventDefault();
+              let Noun=document.getElementById('noun').value;
+        let place=document.getElementById('place').value;
+        let adjective=document.getElementById('adjective').value;
+        let person=document.getElementById('person').value;
+        let verb=document.getElementById('verb').value;
+             let Stories=[`In the middle of ${place}, ${person} found a magical ${Noun}. It gave them the power to ${verb}, but only at sunset.`
+,`Once upon a time, there was a brave ${Noun} who lived in ${place}. Every day, ${name} used to ${verb} until something unexpected happened.`
+,`${Noun} always dreamed of being the best ${Noun} in ${place}. To achieve that, they had to ${verb} harder than anyone else.`
+]
+           
+            let story=document.getElementById('story');
+            let rand=Math.floor(Math.random()*Stories.length);
+            story.innerHTML=Stories[rand];
+
         })
     </script>
 
