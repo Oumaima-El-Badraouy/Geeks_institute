@@ -63,6 +63,16 @@
             "database": "Events",
             "username": "postgres",
             "password": "0000"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "event_management",
+            "database": "event_management",
+            "username": "postgres",
+            "password": "0000"
         }
     ],
     "liveServer.settings.port": 5501
