@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Challenge: Mad Libs</title>
+ </head>
+ <body>
+
+    <h1>Mad Libs</h1>
+
+    <form id="libform">
+        <label for="noun">Noun:</label><input type="text" id="noun"><br>
+        <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+        <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+        <label for="verb">Verb:</label><input type="text" id="verb"><br>
+        <label for="place">A place:</label><input type="text" id="place"><br>
+        <button id="lib-button">Lib it!</button>
+    </form>
+
+    <p>Generated story: 
+    <span id="story"></span>
+    </p>
+
+    <script>
+      
+        let btn=document.getElementById('lib-button');
+        btn.addEventListener('click',function(e){
+            e.preventDefault();
+            let Noun=document.getElementById('noun').value;
+        let place=document.getElementById('place').value;
+        let adjective=document.getElementById('adjective').value;
+        let person=document.getElementById('person').value;
+        let verb=document.getElementById('verb').value;
+        let btn=document.getElementById('lib-button');
+        let story=document.getElementById('story');
+        if(!Noun || !place || !adjective || !person || !verb){
+            alert ("chy input khlitih khawi 3mr kolchy afak ! ");
+        }
+         story.innerHTML= `One day, ${person} went to ${place} with a ${adjective} ${Noun}. 
+While there, ${person} decided to ${verb} all day long. 
+It was the most ${adjective} adventure ever!`;
+        })
+    </script>
+
+ </body>
+</html>
