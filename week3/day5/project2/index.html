@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drumset</title>
+    <style>
+        body{
+            background-image: url('image.jpg');
+             background-size: cover;   
+
+  background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white; text-align: center;">Drumset</h1>
+    <div id="drumset" style="text-align: center;padding-top:100px;">
+         <button id="boom"style="margin: 50px; font-size: 25px;">A</button>
+    <button id="clap"style="margin: 50px; font-size: 25px;">S</button>
+    <button id="hihat"style="margin: 50px; font-size: 25px;">D</button>
+    <button id="kick"style="margin: 50px; font-size: 25px;">F</button>
+    <button id="openhat"style="margin: 50px; font-size: 25px;">G</button>
+    <button id="snare"style="margin: 50px; font-size: 25px;">J</button>
+    <button id="tink"style="margin: 50px; font-size: 25px;">K</button>
+    <button id="tom"style="margin: 50px; font-size: 25px;">L</button>
+    <button id="ride"style="margin: 50px; font-size: 25px;">B</button>
+    </div>
+    <audio id="boom-sound" src="sounds/boom.wav"></audio>
+    <audio id="clap-sound" src="sounds/clap.wav"></audio>
+    <audio id="hihat-sound" src="sounds/hihat.wav"></audio>
+    <audio id="kick-sound" src="sounds/kick.wav"></audio>
+    <audio id="openhat-sound" src="sounds/openhat.wav"></audio>
+    <audio id="snare-sound" src="sounds/snare.wav"></audio>
+    <audio id="tink-sound" src="sounds/tink.wav"></audio>
+    <audio id="tom-sound" src="sounds/tom.wav"></audio>
+    <audio id="ride-sound" src="sounds/ride.wav"></audio>
+    <script>
+    const btns = document.querySelectorAll("button");
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const audio = document.getElementById(btn.id + "-sound");
+            audio.currentTime = 0;
+            audio.play();
+        });
+    });
+    </script>
+</body>
+</html>
+
