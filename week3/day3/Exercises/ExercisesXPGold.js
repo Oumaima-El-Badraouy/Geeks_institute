@@ -1,102 +1,62 @@
-//Exercise 1 : is_Blank
-function isBlank(str) {
-  return str.trim() === "";
+ //Exercise 1 : Select a kind of Music
+    let sel=document.getElementById('genres');
+    
+    let child=document.createElement('option');
+    child.value='classic';
+    child.text='Classic';
+    child.selected=true;
+    sel.appendChild(child);
+    console.log(sel.value)
+    let x = 10;
+// Exercise 2: Delete colors
+    let btn =document.querySelector('input');
+    let selection =document.getElementById('colorSelect');
+  
+    function removecolor() {
+        let selectedIndex = selection.selectedIndex;
+        if (selectedIndex !== -1) { 
+            selection.remove(selectedIndex);  
+        }
+    } ;
+     btn.addEventListener('click', removecolor);
+// Exercise 3 : Create a shopping list
+let shoppingList=[];
+let root = document.getElementById('root');
+let form = document.createElement('form');
+let input = document.createElement('input');
+input.type = 'text';
+let addButton = document.createElement('button');
+addButton.textContent = 'AddItem';
+form.appendChild(input);
+form.appendChild(addButton);
+root.appendChild(form);
+
+function addItem(e) {
+    e.preventDefault(); // bach ma treloadach page
+    let item = input.value;
+    if(item !== '') {
+        shoppingList.push(item); 
+        renderList(); 
+        input.value = ''; 
+    }
 }
-console.log(isBlank('')); 
-console.log(isBlank('abc')); 
+addButton.addEventListener('click', addItem);
+let ul = document.createElement('ul');
+root.appendChild(ul);
 
-//Exercise 2 : Abbrev_name
-function abbrevName(name) {
-  const parts = name.split(" ");
-  const firstName = parts[0];
-  const lastName = parts[1].charAt(0).toUpperCase();
-  return `${firstName} ${lastName}.`;
+function renderList() {
+    ul.innerHTML = ''; 
+    shoppingList.forEach(function(item) {
+        let li = document.createElement('li');
+        li.textContent = item;
+        ul.appendChild(li);
+    });
 }
-
-console.log(abbrevName("Robin Singh")); 
-
-
-//Exercise 3 : SwapCase
-
-
-let chaine ="Hello World";
-console.log(chaine.split(" ").map(mot => mot.charAt(0).toLowerCase() + mot.slice(1)).join(" "));
-
-
-
-// Exercise 4 : Omnipresent value
-
-function isOmnipresent(arr, value) {
-  return arr.every(subArr => subArr.includes(value));
+let clearBtn = document.createElement('button');
+clearBtn.textContent = 'ClearAll';
+root.appendChild(clearBtn);
+function clearAll() {
+    shoppingList = []; 
+    renderList();     
 }
-
-console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 1));
-console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 6));
-
-
-// Exercise 5 : Red table
-
-// <!DOCTYPE HTML>
-// <html>
-// <head>
-//   <style>
-//     table {
-//       border-collapse: collapse;
-//     }
-//     td {
-//       border: 1px solid black;
-//       padding: 3px 5px;
-//     }
-//   </style>
-// </head>
-
-// <body>
-//   <table>
-//     <tr>
-//       <td>1:1</td>
-//       <td>2:1</td>
-//       <td>3:1</td>
-//       <td>4:1</td>
-//       <td>5:1</td>
-//     </tr>
-//     <tr>
-//       <td>1:2</td>
-//       <td>2:2</td>
-//       <td>3:2</td>
-//       <td>4:2</td>
-//       <td>5:2</td>
-//     </tr>
-//     <tr>
-//       <td>1:3</td>
-//       <td>2:3</td>
-//       <td>3:3</td>
-//       <td>4:3</td>
-//       <td>5:3</td>
-//     </tr>
-//     <tr>
-//       <td>1:4</td>
-//       <td>2:4</td>
-//       <td>3:4</td>
-//       <td>4:4</td>
-//       <td>5:4</td>
-//     </tr>
-//     <tr>
-//       <td>1:5</td>
-//       <td>2:5</td>
-//       <td>3:5</td>
-//       <td>4:5</td>
-//       <td>5:5</td>
-//     </tr>
-//   </table>
-//   <script>
-//     let table = document.body.firstElementChild;
-//     for (let i = 0; i < table.rows.length; i++) {
-//       for (let j = 0; j < table.rows[i].cells.length; j++) {
-      
-//           table.rows[i].cells[j].style.backgroundColor = "red";
-        
-//       }
-//     }
-//   </script>
-// </body>
-// </html>
+clearBtn.addEventListener('click', clearAll);
