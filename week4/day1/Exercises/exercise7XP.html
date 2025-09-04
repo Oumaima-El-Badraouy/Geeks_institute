@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul style="list-style: none; display: flex; gap: 20px; padding: 0;">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <p  id="welcomeMessage"></p>
+        <script>
+(function welcomeFunc(name) {
+            let message=`Welcome ${name}`;
+            let p=document.getElementById("welcomeMessage");
+            p.textContent=message;
+})("Oumaima");
+</script>
+</body>
+</html>
