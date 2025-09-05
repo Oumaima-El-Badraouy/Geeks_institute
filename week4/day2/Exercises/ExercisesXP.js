@@ -81,5 +81,5 @@ const students = [{name: "Ray", course: "Computer Science", isPassed: true},
 let passed=students.filter(student=>student.isPassed==true);
 console.log(passed);
 let passed2=students.filter(student=>student.isPassed==true)
-            .forEach(student=>console.log(`Good job ${student.name},you passed the course in ${student.course},`))
+            .forEach(student=>console.log(`Good job ${student.name},you passed the course in ${student.course}.`))
 
