@@ -3,53 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <title>Coloring Squares</title>
+  <style>
+    body {
+      display: flex;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar {
+      width: 100px;
+      padding: 10px;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-right: 1px solid #ccc;
+    }
+
+    #palette button {
+      margin: 5px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    #grid-container {
+      padding: 20px;
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(16, 20px);
+      grid-gap: 1px;
+    }
+
+    #grid div {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #f0f;
+      background: white;
+    }
+
+    button#clearBtn {
+      margin-bottom: 10px;
+      padding: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Coloring Squares</h1>
-  <div id="palette"></div>
-  <div id="grid"></div>
+  <div id="sidebar">
+    <button id="clearBtn">Clear</button>
+    <div id="palette"></div>
+  </div>
+  <div id="grid-container">
+    <h1>Coloring Squares</h1>
+    <div id="grid"></div>
+  </div>
 
   <script>
-const colors = ['red', 'green', 'blue', 'yellow', 'black', 'white', 'purple', 'orange'];
-const palette = document.getElementById('palette');
-let colornow = 'black';
-let mouseDown = false;
-colors.forEach(color => {
-  const btn = document.createElement('button');
-  btn.style.background = color;
-  btn.style.width = '30px';
-  btn.style.height = '30px';
-  btn.addEventListener('click', () => {
-    colornow = color;
-  });
-  palette.appendChild(btn);
-});
+    const colors = ['red', 'green', 'blue', 'yellow', 'black', 'white', 'purple', 'orange'];
+    const palette = document.getElementById('palette');
+    let colornow = 'black';
+    let mouseDown = false;
 
-
-const gridEl = document.getElementById('grid');
-function createGrid(size) {
-  gridEl.innerHTML = '';
-  gridEl.style.display = 'grid';
-  gridEl.style.gridTemplateColumns = `repeat(${size}, 20px)`;//l3ard
-  for (let i = 0; i < size * size; i++) {
-    const cell = document.createElement('div');
-    cell.style.height = '20px';
-    cell.style.border = '1px solid #f0f';
-    cell.style.background = 'white';
-    cell.addEventListener('click', () => {
-      mouseDown = true;
-      cell.style.background = colornow ;
+    colors.forEach(color => {
+      const btn = document.createElement('button');
+      btn.style.background = color;
+      btn.style.width = '30px';
+      btn.style.height = '30px';
+      btn.addEventListener('click', () => {
+        colornow = color;
+      });
+      palette.appendChild(btn);
     });
-
+    const gridEl = document.getElementById('grid');
+    function createGrid(size) {
+      gridEl.innerHTML = '';
+      for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement('div');
+        cell.addEventListener('click', () => {
+          mouseDown = true;
+          cell.style.background = colornow;
+        });
         cell.addEventListener('mouseover', () => {
           if (mouseDown) {
             cell.style.background = colornow;
           }
         });
-    gridEl.appendChild(cell);
-  }
-}
-createGrid(16);
-</script>
+        gridEl.appendChild(cell);
+      }
+    }
+    createGrid(16);
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      const cells = gridEl.querySelectorAll('div');
+      cells.forEach(cell => cell.style.background = 'white');
+      mouseDown = false;
+    });
+    document.body.addEventListener('mouseup', () => {
+      mouseDown = false;
+    });
+  </script>
 </body>
 </html>
