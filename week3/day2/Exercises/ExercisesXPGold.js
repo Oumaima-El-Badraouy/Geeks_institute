@@ -2,36 +2,43 @@
 function isBlank(str) {
   return str.trim() === "";
 }
-console.log(isBlank('')); 
-console.log(isBlank('abc')); 
+
+console.log(isBlank(''));    
+console.log(isBlank('abc'));  
 
 //Exercise 2 : Abbrev_name
 function abbrevName(name) {
-  const parts = name.split(" ");
-  const firstName = parts[0];
-  const lastName = parts[1].charAt(0).toUpperCase();
-  return `${firstName} ${lastName}.`;
+  const parts = name.trim().split(" ");
+  if (parts.length > 1) {
+    return `${parts[0]} ${parts[1].charAt(0).toUpperCase()}.`;
+  }
+  return parts[0]; 
 }
 
-console.log(abbrevName("Robin Singh")); 
-
+console.log(abbrevName("Robin Singh")); // "Robin S."
 
 //Exercise 3 : SwapCase
 
+function swapCase(str) {
+  return str
+    .split("")
+    .map(ch =>
+      ch === ch.toUpperCase()
+        ? ch.toLowerCase()
+        : ch.toUpperCase()
+    )
+    .join("");
+}
 
-let chaine ="Hello World";
-console.log(chaine.split(" ").map(mot => mot.charAt(0).toLowerCase() + mot.slice(1)).join(" "));
-
-
+console.log(swapCase("The Quick Brown Fox")); 
 
 // Exercise 4 : Omnipresent value
-
 function isOmnipresent(arr, value) {
   return arr.every(subArr => subArr.includes(value));
 }
 
-console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 1));
-console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 6));
+console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 1)); 
+console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 6)); 
 
 
 // Exercise 5 : Red table
@@ -88,14 +95,11 @@ console.log(isOmnipresent([[1, 1], [1, 3], [5, 1], [6, 1]], 6));
 //       <td>5:5</td>
 //     </tr>
 //   </table>
+
 //   <script>
 //     let table = document.body.firstElementChild;
 //     for (let i = 0; i < table.rows.length; i++) {
-//       for (let j = 0; j < table.rows[i].cells.length; j++) {
-      
-//           table.rows[i].cells[j].style.backgroundColor = "red";
-        
-//       }
+//       table.rows[i].cells[i].style.backgroundColor = "red";
 //     }
 //   </script>
 // </body>
