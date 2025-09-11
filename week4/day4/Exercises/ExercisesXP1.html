@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+<body>
+    <form method="Get">
+        <label for="username">Votre nom :</label>
+        <input type="text" name="username" id="username">
+        <label for="comments">Commentaires :</label>
+        <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Entrez vos commentaires ici..."></textarea>
+        <input type="submit" value="Send">
+
+    </form>
+    <script>
+        let form=document.querySelector('form');
+        form.addEventListener("submit",async(e)=>{
+            e.preventDefault()
+            let form1=new FormData(form)
+            for (let [key, value] of form1.entries()) {
+                console.log(key, value)
+            }
+        })
+    </script>
+</body>
+</html>
