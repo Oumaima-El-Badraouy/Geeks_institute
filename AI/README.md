@@ -44,23 +44,6 @@ Would you be open to a quick 15-minute chat this week?
 Best,
 Recruiter
 
-
-> Draft outreach email for "FE-Intern-A" using job "Frontend Intern"
-
---- SUBJECT ---
-Frontend Intern opportunity — quick chat?
-
---- PLAINTEXT ---
-Hi,
-
-I’m reaching out because we have an opening for Frontend Intern. I looked at your profile and thought you could be a great fit.
-
-Would you be open to a quick 15-minute chat this week?
-
-Best,
-Recruiter
-
-
 --- HTML PREVIEW ---
 <!doctype html>
 <html>
@@ -71,9 +54,16 @@ Recruiter
   <body style="font-family: Arial, sans-serif; line-height:1.4;">
     <div style="max-width:600px; padding:16px; border:1px solid #ddd; border-radius:8px;">
       <h2 style="margin-top:0;">Frontend Intern opportunity — quick chat?</h2>
-      <div>Hi,<br><br>I’m reaching out because we have an opening for Frontend Intern. I looked at your profile and thought you could be a great fit.<br><br>Would you be open to a quick 15-minute chat this week?<br><br>Best,<br>Recruiter<br></div>
+      <div>Hi, Amina, Sara<br><br>I’m reaching out because we have an opening for Frontend Intern. I looked at your profile and thought you could be a great fit.<br><br>Would you be open to a quick 15-minute chat this week?<br><br>Best,<br>Recruiter<br></div>
       <p style="margin-top:20px; color:#555;">This is a preview. Reply to proceed.</p>
     </div>
   </body>
 </html>
+
+
+
+
+
+
+
 

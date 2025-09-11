@@ -218,7 +218,6 @@ def main_loop():
             for r in results:
                 print_candidate_short(r)
         elif low.startswith("save"):
-            # syntax: Save #1 #3 #4 as "FE-Intern-A"
             m = re.search(r"save\s+((?:#\d+\s*)+)\s+as\s+\"?([^\"]+)\"?", cmd, re.I)
             if not m:
                 print("Syntax: Save #1 #3 as \"Name\"")
@@ -228,7 +227,6 @@ def main_loop():
             ok = save_shortlist(name, idxs, candidates)
             print(f"Saved shortlist '{name}' with {len(idxs)} items.")
         elif low.startswith("draft"):
-            # Draft outreach email for "FE-Intern-A" using job "Frontend Intern"
             m = re.search(r'draft.*for\s+"?([^"]+)"?\s+using job\s+"?([^"]+)"?', cmd, re.I)
             if not m:
                 print('Syntax: Draft outreach email for "SHORTLIST_NAME" using job "Job Title"')
@@ -249,7 +247,6 @@ def main_loop():
             print(email_obj["text"])
             print("\n--- HTML PREVIEW ---")
             print(html)
-            # allow one edit to subject or closing
             edit = input("\nEdit subject or closing? (y/n) ").strip().lower()
             if edit == "y":
                 new_subject = input("New subject (leave empty to keep): ").strip()
@@ -257,10 +254,8 @@ def main_loop():
                 if new_subject:
                     email_obj["subject"] = new_subject
                 if new_closing:
-                    # replace closing in text (naive: everything after last blank line)
                     email_obj["text"] = re.sub(r"\n\s*\Z", "", email_obj["text"])  # strip ending whitespace
                     parts = email_obj["text"].rsplit("\n", 3)
-                    # naive; just append new closing
                     email_obj["text"] = re.sub(r"(?s)(.*)","\\1", email_obj["text"]) + "\n" + new_closing
                 html = html_template(email_obj)
                 print("\n--- REPREVIEW ---")
