@@ -1,0 +1,33 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>form</title>
+ </head>
+ <body>
+     <form method="Get">
+         <label for="username">Votre nom :</label>
+         <input type="text" name="username" id="username">
+         <label for="prenom">Votre prenom :</label>
+         <input type="text" name="prenom" id="prenom">
+         <input type="submit" value="Send">
+
+     </form>
+     <section></section>
+<script>
+   let form=document.querySelector('form');
+   let section=document.querySelector('section');
+       form.addEventListener("submit",async(e)=>{
+           e.preventDefault()
+           let form1=new FormData(form)
+           let obj={}
+           for (let [key, value] of form1.entries()) {
+            obj[key]=value
+            section.innerHTML=JSON.stringify(obj)
+           }
+       })
+</script>
+ </body>
+</html>
