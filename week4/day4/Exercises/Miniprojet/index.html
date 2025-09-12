@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mini projet</title>
+    <title>Mini Projet Quotes</title>
 </head>
 <body>
-    <section id="section1"></section>
-    <button onclick="handleclick()">Generate Quote</button>
-    <form method="POST">
-           <label for="author">author:</label>
-        <input type="text" name="author" id="author">
-        <label for="quote">Quote :</label>
-        <textarea  name="quote" id="quote"></textarea>
+    <section id="section1">Click "Generate Quote" to see a quote.</section>
+    <button onclick="handleClick()">Generate Quote</button>
+
+    <h3>Add a New Quote</h3>
+    <form id="addQuoteForm" method="POST">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" required>
+        <label for="quote">Quote:</label>
+        <textarea name="quote" id="quote" required></textarea>
         <input type="submit" value="Send">
-
-
     </form>
+    
+    <button onclick="charCount(true)">Char count (with spaces)</button>
+    <button onclick="charCount(false)">Char count (no spaces)</button>
+    <button onclick="wordCount()">Word count</button>
+    <button onclick="likeQuote()">Like ❤️</button>
+    <div>Likes: <span id="likes">0</span></div>
+
+    <hr>
+
+    <h3>Filter by Author</h3>
+    <form id="filterForm">
+        <input type="text" name="authorFilter" placeholder="Author name" required>
+        <button type="submit">Filter</button>
+    </form>
+    <button id="prevBtn" style="display:none">Previous</button>
+    <button id="nextBtn" style="display:none">Next</button>
+
     <script src="script.js"></script>
 </body>
 </html>
