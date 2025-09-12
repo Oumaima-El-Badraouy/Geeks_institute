@@ -6,23 +6,14 @@
     <title>form</title>
 </head>
 <body>
-    <form method="Get">
+    <form method="Get" action="data.html">
         <label for="username">Votre nom :</label>
         <input type="text" name="username" id="username">
-        <label for="comments">Commentaires :</label>
-        <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Entrez vos commentaires ici..."></textarea>
+        <label for="prenom">Votre prenom :</label>
+        <input type="text" name="prenom" id="prenom">
         <input type="submit" value="Send">
 
     </form>
-    <script>
-        let form=document.querySelector('form');
-        form.addEventListener("submit",async(e)=>{
-            e.preventDefault()
-            let form1=new FormData(form)
-            for (let [key, value] of form1.entries()) {
-                console.log(key, value)
-            }
-        })
-    </script>
+
 </body>
 </html>
