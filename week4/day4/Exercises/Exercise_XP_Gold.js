@@ -31,8 +31,8 @@
 // <html>
 // <head><meta charset="utf-8"><title>Receiver GET</title></head>
 // <body>
-//   <h2>Received (GET)</h2>
-//   <div id="output">Loading…</div>
+//   <h2>Received</h2>
+//   <div id="output">tsna blaty …</div>
 
 //   <script>
 //     const params = new URLSearchParams(window.location.search);
@@ -50,3 +50,4 @@
 //   </script>
 // </body>
 // </html>
+
