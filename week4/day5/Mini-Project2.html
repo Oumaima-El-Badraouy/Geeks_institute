@@ -60,7 +60,6 @@ margin-top: 15px;
 let humanPlayer, pcPlayer;
 let board = Array(9).fill(null);
 let gameOver = false;
-
 const winCombos = [
 [0,1,2],[3,4,5],[6,7,8],
 [0,3,6],[1,4,7],[2,5,8],
@@ -77,9 +76,9 @@ document.getElementById("obtn").addEventListener("click", () => {
 humanPlayer = "O";
 pcPlayer = "X";
 statusDiv.textContent = "You are O. Computer starts!";
-computerMove(); 
 });
 document.getElementById("restart").addEventListener("click", restartGame);
+
 cells.forEach(cell => {
 cell.addEventListener("click", () => {
 if (!gameOver && humanPlayer && !cell.textContent) {
@@ -102,6 +101,7 @@ function computerMove(){
 if (gameOver) return;
 let emptySquares = board.map((val, idx) => val ? null : idx).filter(val => val !== null);
 if (emptySquares.length === 0) return;
+
 let randomIndex = emptySquares[Math.floor(Math.random() * emptySquares.length)];
 board[randomIndex] = pcPlayer;
 document.getElementById(randomIndex).textContent = pcPlayer;
