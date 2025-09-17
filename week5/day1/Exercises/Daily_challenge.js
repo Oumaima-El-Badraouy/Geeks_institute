@@ -25,7 +25,6 @@ makeAllCaps(["apple", "pear", "banana"])
       .then((arr) => sortWords(arr))
       .then((result) => console.log(result))
       .catch(error => console.log(error))
-// the array of words uppercased and sorted
 makeAllCaps(["apple", "pear", "banana", "melon", "kiwi"])
       .then((arr) => sortWords(arr))
       .then((result) => console.log(result)) //["APPLE","BANANA", "KIWI", "MELON", "PEAR"]
