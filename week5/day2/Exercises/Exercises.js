@@ -1,42 +1,42 @@
-// //  Exercise 1 : Giphy API
+//  Exercise 1 : Giphy API
 
-// const giphy=async()=>{
-// try{
-//     const response=await fetch("https://api.giphy.com/v1/gifs/search?q=hilarious&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My");
-//     const data=await response.json();
-//     console.log(data);
-// }
-// catch(error){
-//     console.error("Error fetching data from Giphy API:", error);
-// }
-// }
-// giphy();
+const giphy=async()=>{
+try{
+    const response=await fetch("https://api.giphy.com/v1/gifs/search?q=hilarious&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My");
+    const data=await response.json();
+    console.log(data);
+}
+catch(error){
+    console.error("Error fetching data from Giphy API:", error);
+}
+}
+giphy();
 
-// //  Exercise 2 : Giphy API
-// const giphy2= async()=>{
-//  try{
-//     const response=await fetch("https://api.giphy.com/v1/gifs/search?q=sun&limit=10&offset=2&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My");
-//     const data=await response.json();
-//     console.log(data);
-// }
-// catch(error){
-//     console.error("Error fetching data from Giphy API:", error);
-// }
-// }
-// giphy2();
+//  Exercise 2 : Giphy API
+const giphy2= async()=>{
+ try{
+    const response=await fetch("https://api.giphy.com/v1/gifs/search?q=sun&limit=10&offset=2&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My");
+    const data=await response.json();
+    console.log(data);
+}
+catch(error){
+    console.error("Error fetching data from Giphy API:", error);
+}
+}
+giphy2();
 
-// // Exercise 3 : Async function
-// const fetchfunc= async()=>{
-//     try{
-//         const response=await fetch("https://www.swapi.tech/api/starships/9");
-//         const data=await response.json();
-//         console.log(data);
-//     }
-//     catch(error){
-//         console.error("Error fetching data from SWAPI:", error);
-//     }
-// }
-// fetchfunc();
+// Exercise 3 : Async function
+const fetchfunc= async()=>{
+    try{
+        const response=await fetch("https://www.swapi.tech/api/starships/9");
+        const data=await response.json();
+        console.log(data);
+    }
+    catch(error){
+        console.error("Error fetching data from SWAPI:", error);
+    }
+}
+fetchfunc();
 
  // Exercise 4 : Analyze
 function resolveAfter2Seconds() {
