@@ -1,53 +1,53 @@
-// Exercise 1 : Giphy API #2
-const giphy=async()=>{
-    try{
-        const response=await fetch("https://api.giphy.com/v1/gifs/search?q=hilarious&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My");
-         if(!response.ok){
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data=await response.json();
-        const randomnumber=Math.floor(Math.random()*data.data.length);
-        const gif=data.data[randomnumber].images.original.url;
-        const img= document.createElement("img");
-        img.src=gif;
-        document.body.appendChild(img);
-    }
-    catch(error){
-        console.error("Error fetching data from Giphy API:", error);
-    }
-}
-giphy();
+// // Exercise 1 : Giphy API #2
+// const giphy=async()=>{
+//     try{
+//         const response=await fetch("https://api.giphy.com/v1/gifs/search?q=hilarious&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My");
+//          if(!response.ok){
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         const data=await response.json();
+//         const randomnumber=Math.floor(Math.random()*data.data.length);
+//         const gif=data.data[randomnumber].images.original.url;
+//         const img= document.createElement("img");
+//         img.src=gif;
+//         document.body.appendChild(img);
+//     }
+//     catch(error){
+//         console.error("Error fetching data from Giphy API:", error);
+//     }
+// }
+// giphy();
 
-// Exercise 2 : Analyze #2
-let resolveAfter2Seconds = function () {
-    console.log("starting slow promise");
-    return new Promise(resolve => {
-        setTimeout(function () {
-            resolve("slow");
-            console.log("slow promise is done");
-        }, 2000);
-    });
-};
+// // Exercise 2 : Analyze #2
+// let resolveAfter2Seconds = function () {
+//     console.log("starting slow promise");
+//     return new Promise(resolve => {
+//         setTimeout(function () {
+//             resolve("slow");
+//             console.log("slow promise is done");
+//         }, 2000);
+//     });
+// };
 
-let resolveAfter1Second = function () {
-    console.log("starting fast promise");
-    return new Promise(resolve => {
-        setTimeout(function () {
-            resolve("fast");
-            console.log("fast promise is done");
-        }, 1000);
-    });
-};
+// let resolveAfter1Second = function () {
+//     console.log("starting fast promise");
+//     return new Promise(resolve => {
+//         setTimeout(function () {
+//             resolve("fast");
+//             console.log("fast promise is done");
+//         }, 1000);
+//     });
+// };
 
-let sequentialStart = async function () {
-    console.log('==SEQUENTIAL START==');
-    const slow = await resolveAfter2Seconds();
-    console.log(slow);
-    const fast = await resolveAfter1Second();
-    console.log(fast);
-}
+// let sequentialStart = async function () {
+//     console.log('==SEQUENTIAL START==');
+//     const slow = await resolveAfter2Seconds();
+//     console.log(slow);
+//     const fast = await resolveAfter1Second();
+//     console.log(fast);
+// }
 
-sequentialStart()
+// sequentialStart()
 
 // radi tla3 hady lwla '==SEQUENTIAL START==' puis "starting slow promise"puis "slow promise is done"  3ad 
 //"slow" puis "starting fast promise"puis "fast promise is done" puis'fast'
