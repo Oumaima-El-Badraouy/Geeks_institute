@@ -93,32 +93,27 @@ setTimeout(concurrentStart, 4000)
 
 
 // Exercise 4 : Modify fetch with Async/Await
-
 const urls = [
-        "https://jsonplaceholder.typicode.com/WRONG_URL", // to test error handling bryty tchouf lcode lcorrect dir fblast  WRONG_URL users
-        "https://jsonplaceholder.typicode.com/posts",
-        "https://jsonplaceholder.typicode.com/albums"
-      ];
+    "https://jsonplaceholder.typicode.com/users",
+    "https://jsonplaceholder.typicode.com/WRONG_URL", // URL خاطئ
+    "https://jsonplaceholder.typicode.com/albums"
+];
 
 const getData = async function() {
-    try{
- const [ users, posts, albums ] = await Promise.all(urls.map(url =>
-      fetch(url).then(resp => {
-          if (!resp.ok) {
-              throw new Error(`oops error! status: ${resp.status} for ${url}`);
-          }
-          return resp.json();
-      })
-  ));
-  console.log('users', users);
-  console.log('posts', posts);
-  console.log('albums', albums);
+    try {
+        const results = await Promise.all(urls.map(async url => {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json();
+        }));
+
+        const [users, posts, albums] = results;
+        console.log('users', users);
+        console.log('posts', posts);
+        console.log('albums', albums);
+    } catch (error) {
+        console.log("ooooooops", error);
     }
- catch(error){
-    console.log("oops", error); 
-}
-  
 }
 
-getData()
-
+getData();
