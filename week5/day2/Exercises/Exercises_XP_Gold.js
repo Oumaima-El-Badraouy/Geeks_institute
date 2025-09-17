@@ -95,7 +95,7 @@ setTimeout(concurrentStart, 4000)
 // Exercise 4 : Modify fetch with Async/Await
 
 const urls = [
-        "https://jsonplaceholder.typicode.com/WRONG_URL",
+        "https://jsonplaceholder.typicode.com/WRONG_URL", // to test error handling bryty tchouf lcode lcorrect dir fblast  WRONG_URL users
         "https://jsonplaceholder.typicode.com/posts",
         "https://jsonplaceholder.typicode.com/albums"
       ];
