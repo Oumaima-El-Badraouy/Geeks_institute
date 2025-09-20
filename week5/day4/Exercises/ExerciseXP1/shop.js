@@ -1,9 +1,10 @@
 const products=require("./products.js");
 function displayProductDetails(nameproduct){
-    if(products.name==nameproduct){
-        console.log(`Product Name: ${products.name}`);
-        console.log(`Price: $${products.price}`);
-        console.log(`Category: ${products.category}`);
+    const product=products.find(p=>p.name===nameproduct);
+    if(product){
+        console.log(`Product Name: ${product.name}`);
+        console.log(`Price: $${product.price}`);
+        console.log(`Category: ${product.category}`);
     }
     else{
         console.log("Product not found.");
