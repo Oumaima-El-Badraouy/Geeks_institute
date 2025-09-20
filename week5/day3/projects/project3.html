@@ -9,9 +9,10 @@
 
   <input type="number" id="amount" placeholder="Enter amount">
 
-  <select id="from"></select>
+  <select id="from">
+    
+  </select>
   <select id="to"></select>
-
   <button id="convert">Convert</button>
   <button id="switch"> Switch</button>
   <p id="result"></p>
@@ -25,6 +26,7 @@
       .then(res => res.json())
       .then(data => {
         const codes = data.supported_codes;
+        console.log(data);
         codes.forEach(([code, name]) => {
           let option1 = document.createElement("option");
           option1.value = code;
@@ -42,10 +44,9 @@
     function convertCurrency() {
       const from = fromSelect.value;
       const to = toSelect.value;
-      const amount = amountInput.value;
       if (!amount) {
         resultEl.textContent = "⛔ Please enter an amount!";
-        return;
+        return ;
       }
       fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}/${amount}`)
         .then(res => res.json())
