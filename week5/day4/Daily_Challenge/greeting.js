@@ -1,4 +1,4 @@
 function greet(name){
     console.log(`Hello, ${name}! Welcome .`);
 }
-module.exports=greet;
+export default greet;
