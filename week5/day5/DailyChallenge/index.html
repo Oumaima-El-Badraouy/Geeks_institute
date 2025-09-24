@@ -30,15 +30,13 @@ let form1=document.querySelector('form');
 let section=document.getElementById('mssg');
 form1.addEventListener('submit',async(e)=>{
     e.preventDefault();
-  const index=Math.floor((Math.random()*dataemojies.length));
-  console.log(index)
     const form= new FormData(form1);
-    if(form.get("emojies")===dataemojies[index].value){
-        section.textContent='nice';
-    }
-    else{
-        section.textContent='no ! repeat please';
-    }; 
+   let varEmoj=form.get("emojies");
+   return fetch('/emojies'){
+    
+   }
+       
+   
 })
 
 
