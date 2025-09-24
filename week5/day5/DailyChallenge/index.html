@@ -20,17 +20,17 @@
     </form>
     <script >
         const dataemojies=[
-    {id:1,emoji:"😀",name:"Grinning Face"},
-    {id:2,emoji:"😂",name:"Face with Tears of Joy"},
-    {id:3,emoji:"😍",name:"Smiling Face with Heart-Eyes"},
-    {id:4,emoji:"🤔",name:"Thinking Face"},
+    {id:1,emoji:"😀",name:"Grinning Face",value:"Grinning"},
+    {id:2,emoji:"😂",name:"Face with Tears of Joy",value:"Face"},
+    {id:3,emoji:"😍",name:"Smiling Face with Heart-Eyes",value:"Smiling"},
+    {id:4,emoji:"🤔",name:"Thinking Face",value:"Thinking"},
 ]
 let form1=document.querySelector('form');
 form1.addEventListener('submit',async(e)=>{
     e.preventDefault();
   const index=Math.floor(Math.random()*dataemojies.length);
     const form= new FormData(form1);
-    console.log(form);
+    console.log(form.get("emojies"));
 })
 
 
