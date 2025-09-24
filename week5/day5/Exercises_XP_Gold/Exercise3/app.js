@@ -1,68 +1,78 @@
-const express= require('express');
+const express = require('express');
 const cors = require('cors');
-const uuid = require('uuid');
-const app= express();
+const { v4: uuidv4 } = require('uuid');
+const app = express();
 app.use(express.json());
 app.use(cors());
-const todo=[];
-
-app.post('/api/todos',async(req,res)=>{
-try{
-        const {id,title,complited}=req.body;
-        data.push({id,title,complited});
-        res.json('success');
-    }
-    catch(error){
-        console.log('Error:',err.message);
-    }
+let todos = [];
+app.post('/api/todos', async (req, res) => {
+  try {
+    const { title, completed } = req.body;
+    const newTodo = { id: uuidv4(), title, completed: completed || false };
+    todos.push(newTodo);
+    res.json(newTodo);
+  } catch (error) {
+    console.log('Error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
-app.get('/api/todos',async(req,res)=>{
-    try{
-        const data=todo;
-        res.json(data);
-    }
-    catch(error){
-        console.log('Error:',err.message);
-    }
-
+app.get('/api/todos', async (req, res) => {
+  try {
+    res.json(todos);
+  } catch (error) {
+    console.log('Error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
-app.get('/api/todos/:id',async(req,res)=>{
- try{
-    const id=parseInt(req.params.id);
-        const data=todo.find(todo=>todo.id===id);
-        if(!data){
-             res.json('todo undefined');
-        }
-        res.json(data);
+app.get('/api/todos/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const todo = todos.find(t => t.id === id);
+    if (!todo) {
+      return res.status(404).json({ message: 'todo undefined' });
     }
-    catch(error){
-        console.log('Error:',err.message);
-    }
+    res.json(todo);
+  } catch (error) {
+    console.log('Error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
-app.put('/api/todos/:id',async(req,res)=>{
-     try{
-       
-        const id=parseInt(req.params.id);
-         const todo2  = req.body;
-        const todos=todo.find(todo=>todo.id===id);
-        
-        if(!data){
-             res.json('todo undefined');
-        }
+app.put('/api/todos/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { title, completed } = req.body;
+    const todo = todos.find(t => t.id === id);
 
-        res.json(data);
-    }
-    catch(error){
-        console.log('Error:',err.message);
+    if (!todo) {
+      return res.status(404).json({ message: 'todo undefined' });
     }
 
+    todo.title = title !== undefined ? title : todo.title;
+    todo.completed = completed !== undefined ? completed : todo.completed;
+
+    res.json(todo);
+  } catch (error) {
+    console.log('Error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
-app.delete('/api/todos/:id',async(req,res)=>{
+app.delete('/api/todos/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const exists = todos.find(t => t.id === id);
 
+    if (!exists) {
+      return res.status(404).json({ message: 'todo undefined' });
+    }
+
+    todos = todos.filter(t => t.id !== id);
+    res.json({ message: 'todo deleted', todos });
+  } catch (error) {
+    console.log('Error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
-
-app.listen(5000,()=>{
-    console.log('server running in http://localhost:6000/');
-})
-
+app.listen(5000, () => {
+  console.log('server running at http://localhost:5000/');
+});
