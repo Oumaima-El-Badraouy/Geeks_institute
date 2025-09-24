@@ -46,7 +46,6 @@ app.put('/api/todos/:id', async (req, res) => {
     if (!todo) {
       return res.status(404).json({ message: 'todo undefined' });
     }
-
     todo.title = title !== undefined ? title : todo.title;
     todo.completed = completed !== undefined ? completed : todo.completed;
 
@@ -64,7 +63,6 @@ app.delete('/api/todos/:id', async (req, res) => {
     if (!exists) {
       return res.status(404).json({ message: 'todo undefined' });
     }
-
     todos = todos.filter(t => t.id !== id);
     res.json({ message: 'todo deleted', todos });
   } catch (error) {
@@ -72,7 +70,6 @@ app.delete('/api/todos/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 app.listen(5000, () => {
   console.log('server running at http://localhost:5000/');
 });
