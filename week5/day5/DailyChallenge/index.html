@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji game</title>
+</head>
+<body>
+    
+    <form method="POST">
+            <label for="emokji">Choose one Emoji</label>
+            <select name="emojies" id="emojies">
+                <option value="Grinning">Grinning Face</option>
+                <option value="Face">Face with Tears of Joy</option>
+                <option value="Smiling">Smiling Face with Heart-Eyes</option>
+                <option value="Thinking">Thinking Face</option>
+            </select>
+            <button type="submit">Submit</button>
+        
+    </form>
+    <script >
+        const dataemojies=[
+    {id:1,emoji:"😀",name:"Grinning Face"},
+    {id:2,emoji:"😂",name:"Face with Tears of Joy"},
+    {id:3,emoji:"😍",name:"Smiling Face with Heart-Eyes"},
+    {id:4,emoji:"🤔",name:"Thinking Face"},
+]
+let form1=document.querySelector('form');
+form1.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+  const index=Math.floor(Math.random()*dataemojies.length);
+    const form= new FormData(form1);
+    console.log(form);
+})
+
+
+    </script>
+</body>
+</html>
