@@ -1,11 +1,11 @@
 const express =require('express');
 const router=express.Router();
 
-router.get('/',()=>{
-    return 'Home page';
+router.get('/',(req,res)=>{
+    res.send( 'Home page');
 });
 
-router.get('/About',()=>{
-    return 'About Us';
+router.get('/About',(req,res)=>{
+        res.send( 'About Us');
 });
  module.exports=router;
