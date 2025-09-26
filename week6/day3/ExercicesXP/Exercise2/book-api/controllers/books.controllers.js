@@ -12,13 +12,13 @@ const getbook=async(req,res)=>{
 };
 const createbook=async(req,res)=>{
     const data=req.body;
-    const book=await Book.create(data);
+    await Book.create(data);
     res.send('book created success ');
 };
 const updatebook=async(req,res)=>{
     const id=req.params.id;
         const data=req.body;
-    const book=await Book.update(data, { where: { id } });
+    await Book.update(data, { where: { id } });
     res.send('book updated success ');
 }
 const deletebook=async(req,res)=>{
