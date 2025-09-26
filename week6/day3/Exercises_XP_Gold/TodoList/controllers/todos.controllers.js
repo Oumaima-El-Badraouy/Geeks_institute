@@ -1,6 +1,6 @@
 
 const Todo= require('../models/todo.js');
-
+const uuid=require('uuid');
 const gettodos=async(req,res)=>{
     const todos=await Todo.findAll();
     res.json(todos);
@@ -12,7 +12,7 @@ const gettodo=async(req,res)=>{
 };
 const createtodo=async(req,res)=>{
     const data=req.body;
-    await Todo.create(data);
+    await Todo.create({id: uuid.v4(),...data});
     res.send('todo created success ');
 };
 const updatetodo=async(req,res)=>{

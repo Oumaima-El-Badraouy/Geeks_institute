@@ -3,7 +3,7 @@ const { sequelize } = require('../config/database.js');
 
 const Todo = sequelize.define('todo', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     autoIncrement: false,
     primaryKey: true,
     allowNull: false
