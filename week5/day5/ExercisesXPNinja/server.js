@@ -39,12 +39,6 @@ app.use(cors());
       "correctAnswer": "حيت مشهور بزاف وكيتستعمل فمشاريع كبار"
     }
   ];
-
-
-
-
-
-
 app.get('/questions',(req,res)=>{
     return res.send(questions);
 })
