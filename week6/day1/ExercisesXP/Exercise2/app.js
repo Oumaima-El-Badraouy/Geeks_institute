@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const router = require('./routes/index.js');
 const app=express();
+const router = require('./Routes/todos.js');
 app.use(cors());
 app.use(express.json());
 
 
 
-app.use('/',router);
+app.use('/todos',router);
 
 
 
@@ -17,6 +17,5 @@ app.use('/',router);
 app.listen(3000,()=>{
     console.log('server running at http://localhost:3000/')
 })
-
 
 
