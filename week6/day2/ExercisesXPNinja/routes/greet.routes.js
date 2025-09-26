@@ -9,6 +9,6 @@ router.post('/greet', (req, res) => {
     if (!name) {
         return res.send('❌ Please enter your name!');
     }
-    res.send(`<h1>Hello ${name}! ${emoji}</h1>`);
+    res.json(`<h1>Hello ${name}! ${emoji}</h1>`);
 });
 module.exports = router;

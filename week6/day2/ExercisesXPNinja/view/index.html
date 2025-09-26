@@ -44,12 +44,12 @@ form input, select, button {
             getData();
             form.addEventListener('submit',async(e)=>{
                 e.preventDefault();
-                let dataform= await new FormData(form);
+                let dataform=  new FormData(form);
                 const vazer=Object.fromEntries(dataform.entries()); 
                 const postData=await fetch('http://localhost:3000/emojies/greet',{
                     method: 'POST',
                    headers: {
-                'Content-Type': 'application/json' // specify JSON
+                'Content-Type': 'application/json' 
             },
             body: JSON.stringify(vazer)
                 });
