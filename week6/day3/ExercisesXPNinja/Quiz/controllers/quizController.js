@@ -1,15 +1,14 @@
-const Question = require('../models/question.js');
-const Option = require('../models/option.js');
+const { Question, Option } = require('../models');
 
 const getQuestions = async (req, res) => {
   try {
     const questions = await Question.findAll({
-      include: [{ model: Option, through: { attributes: [] } }]
+      include: [{ model: Option, as: 'options' }]
     });
     res.json(questions);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).json({ error: 'Erreur lors de la récupération des questions' });
   }
 };
-
-module.exports = { getQuestions };
+module.exports={getQuestions};

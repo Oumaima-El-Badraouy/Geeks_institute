@@ -6,7 +6,7 @@ const quizRoutes = require('./routes/quizRoutes');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // frontend files
+app.use(express.static('public'));
 
 app.use('/api', quizRoutes);
 
