@@ -1,46 +1,84 @@
-const express = require('express');
-const router=express.Router();
-router.get('/users/:id', async (req, res) => {
-try {
-const users = await readUsers();
-const user = users.find(u => u.id === req.params.id);
-if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé.' });
-const safe = { ...user, password: undefined };
-res.json(safe);
-} catch (err) {
-console.error('Get user error:', err);
-res.status(500).json({ message: 'Erreur lecture utilisateur.' });
-}
+const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const router = express.Router();
+
+let users = [];
+router.post("/register", async (req, res) => {
+  try {
+    const { name, lastName, email, username, password } = req.body;
+
+    if (!name || !lastName || !email || !username || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+    const existing = users.find(u => u.username === username || u.email === email);
+    if (existing) {
+      return res.status(400).json({ error: "User already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      id: Date.now(),
+      name,
+      lastName,
+      email,
+      username,
+      password: hashedPassword,
+    };
+
+    users.push(newUser);
+
+    res.status(201).json({ message: "User registered successfully", user: newUser });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
+router.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-router.put('/users/:id', async (req, res) => {
-try {
-const { name, lastName, email, username, password } = req.body;
-const users = await readUsers();
-const idx = users.findIndex(u => u.id === req.params.id);
-if (idx === -1) return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    const user = users.find(u => u.username === username);
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
 
-if (username) {
-const other = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.id !== req.params.id);
-if (other) return res.status(409).json({ message: 'Le nom d\'utilisateur est déjà pris par un autre utilisateur.' });
-users[idx].username = username;
-}
-if (email) {
-const other = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.id !== req.params.id);
-if (other) return res.status(409).json({ message: 'L\'email est déjà utilisé par un autre utilisateur.' });
-users[idx].email = email;
-}
-if (name) users[idx].name = name;
-if (lastName) users[idx].lastName = lastName;
-if (password) users[idx].password = await bcrypt.hash(password, SALT_ROUNDS);
-users[idx].updatedAt = new Date().toISOString();
-await writeUsers(users);
-const safe = { ...users[idx], password: undefined };
-res.json({ message: 'Utilisateur mis à jour.', user: safe });
-} catch (err) {
-console.error('Update user error:', err);
-res.status(500).json({ message: 'Erreur mise à jour.' });
-}
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const token = jwt.sign({ id: user.id, username: user.username }, "SECRET_KEY", {
+      expiresIn: "1h",
+    });
+
+    res.json({ message: "Login successful", token });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+router.get("/", (req, res) => {
+  res.json(users);
+});
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, lastName, email, username } = req.body;
+
+  const userIndex = users.findIndex(u => u.id == id);
+  if (userIndex === -1) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  users[userIndex] = {
+    ...users[userIndex],
+    name: name || users[userIndex].name,
+    lastName: lastName || users[userIndex].lastName,
+    email: email || users[userIndex].email,
+    username: username || users[userIndex].username,
+  };
+
+  res.json({ message: "User updated", user: users[userIndex] });
 });
 
 module.exports = router;
