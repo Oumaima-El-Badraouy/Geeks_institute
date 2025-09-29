@@ -4,7 +4,7 @@
 import UserFavoriteAnimals from './UserFavoriteAnimals.jsx';
 import Exercise3 from './Exercise3.jsx';
 import './App.css'
-
+import DemoCarousel from './DemoCarousel.jsx';
 function App() {
       const myelement = <h1>I Love JSX!</h1>;
       const sum =5 + 5;
@@ -27,6 +27,7 @@ function App() {
        </div>
         <UserFavoriteAnimals favAnimals={user.favAnimals}/>
         <Exercise3/>
+        <DemoCarousel/>
     </>
   )
 }
