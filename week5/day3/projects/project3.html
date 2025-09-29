@@ -6,15 +6,11 @@
 </head>
 <body>
   <h2>Currency Converter</h2>
-
   <input type="number" id="amount" placeholder="Enter amount">
-
-  <select id="from">
-    
-  </select>
+  <select id="from"></select>
   <select id="to"></select>
   <button id="convert">Convert</button>
-  <button id="switch"> Switch</button>
+  <button id="switch">Switch</button>
   <p id="result"></p>
   <script>
     const apiKey = "6ebc99cc57c05fc2c6910e8b"; 
@@ -22,11 +18,12 @@
     const toSelect = document.getElementById("to");
     const amountInput = document.getElementById("amount");
     const resultEl = document.getElementById("result");
+
     fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/codes`)
       .then(res => res.json())
       .then(data => {
+
         const codes = data.supported_codes;
-        console.log(data);
         codes.forEach(([code, name]) => {
           let option1 = document.createElement("option");
           option1.value = code;
@@ -38,15 +35,17 @@
           option2.textContent = `${code} - ${name}`;
           toSelect.appendChild(option2);
         });
-        fromSelect.value = "USD";
+        fromSelect.value = "BND";
         toSelect.value = "EUR";
       });
+
     function convertCurrency() {
       const from = fromSelect.value;
       const to = toSelect.value;
+      const amount = amountInput.value;
       if (!amount) {
         resultEl.textContent = "⛔ Please enter an amount!";
-        return ;
+        return;
       }
       fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}/${amount}`)
         .then(res => res.json())
@@ -55,11 +54,12 @@
         });
     }
     document.getElementById("convert").addEventListener("click", convertCurrency);
+
     document.getElementById("switch").addEventListener("click", () => {
       let temp = fromSelect.value;
       fromSelect.value = toSelect.value;
       toSelect.value = temp;
-      convertCurrency(); 
+      convertCurrency();
     });
   </script>
 </body>
