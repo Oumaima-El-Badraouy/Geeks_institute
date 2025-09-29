@@ -7,9 +7,19 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import DemoCarousel from './DemoCarousel.jsx';
 import BootstrapCard from './BootstrapCard.jsx';
+import Contact from './Components/Contact.jsx';
+import Card from './Components/Card.jsx';
+import Navbar from './Components/Navbar.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 function App() {
       const myelement = <h1>I Love JSX!</h1>;
       const sum =5 + 5;
+      const cardsData = [
+    { title: 'Web Design', text: 'Beautiful and responsive designs', icon: 'fas fa-paint-brush' },
+    { title: 'Development', text: 'Modern web development', icon: 'fas fa-code' },
+    { title: 'SEO', text: 'Improve your search ranking', icon: 'fas fa-chart-line' },
+  ];
       const user = {
   firstName: 'Bob',
   lastName: 'Dylan',
@@ -52,6 +62,19 @@ function App() {
        <p style={{ paddingTop:'200px' }}> 
          <BootstrapCard celebrities={celebrities} />
       </p>
+
+      <div className="container">
+   <Navbar />
+      <div className="container my-5" id="cards">
+        <div className="row">
+          {cardsData.map((card, index) => (
+            <Card key={index} {...card} />
+          ))}
+        </div>
+      </div>
+      <Contact />
+</div>
+
     </div>
   )
 }
