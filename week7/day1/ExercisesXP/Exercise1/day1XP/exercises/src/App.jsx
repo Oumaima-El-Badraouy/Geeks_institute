@@ -2,6 +2,7 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import UserFavoriteAnimals from './UserFavoriteAnimals.jsx';
+import Exercise3 from './Exercise3.jsx';
 import './App.css'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
     <h3> hello {user.firstName} {user.lastName}  </h3>
        </div>
         <UserFavoriteAnimals favAnimals={user.favAnimals}/>
+        <Exercise3/>
     </>
   )
 }
