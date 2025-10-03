@@ -6,7 +6,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-const { connectDB, sequelize } = require('./config/database');
+const { connectDB, sequelize } = require('./config/database.js');
 connectDB();
 const bookRouter = require('./routes/books.routes.js');
  app.use('/books', bookRouter);

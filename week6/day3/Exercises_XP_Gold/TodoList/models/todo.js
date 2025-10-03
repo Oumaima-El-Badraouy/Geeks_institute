@@ -1,25 +1,10 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database.js');
-
-const Todo = sequelize.define('todo', {
-  id: {
-    type: DataTypes.STRING,
-    autoIncrement: false,
-    primaryKey: true,
-    allowNull: false
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  completed: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-  
-}, {
-  tableName: 'todos',
-  timestamps: false
-});
+const db = require('../controllers/database.js');
+const Todo = {
+  findAll: () => db('todos').select('*'),
+  findByPk: (id) => db('todos').where({ id }).first(),
+  create: (data) => db('todos').insert(data).returning('*'), // returning خاص PostgreSQL
+  update: (id, data) => db('todos').where({ id }).update(data).returning('*'),
+  destroy: (id) => db('todos').where({ id }).del()
+};
 
 module.exports = Todo;

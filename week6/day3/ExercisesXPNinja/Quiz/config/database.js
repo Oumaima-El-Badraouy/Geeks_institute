@@ -1,15 +1,11 @@
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('blog-api', 'postgres', '0000', {
-    host: 'localhost',
-    dialect: 'postgres',
+const knex = require('knex');
+const db = knex({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user: 'postgres',
+    password: '0000',
+    database: 'blog-api'
+  }
 });
-const connectDB = async () => {
-    try {
-        await sequelize.authenticate();
-        console.log("✅ Connected to PostgreSQL successfully");
-    } catch (error) {
-        console.error("❌ Unable to connect:", error);
-    }
-};
-
-module.exports = { sequelize, connectDB };
+module.exports = db;

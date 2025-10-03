@@ -1,13 +1,20 @@
-// server/models/Option.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const db = require('../config/database'); // knex instance
+const Option = {
+  findAll: () => db('options').select('*'),
 
-const Option = sequelize.define('option', {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  optionText: { type: DataTypes.STRING, allowNull: false }
-}, {
-  tableName: 'options',
-  timestamps: true
-});
+  findById: (id) => db('options').where({ id }).first(),
 
+  create: (data) => db('options')
+    .insert(data)
+    .returning('*'), // PostgreSQL
+
+  update: (id, data) => db('options')
+    .where({ id })
+    .update(data)
+    .returning('*'),
+
+  delete: (id) => db('options')
+    .where({ id })
+    .del()
+};
 module.exports = Option;

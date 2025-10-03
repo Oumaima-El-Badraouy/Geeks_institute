@@ -1,15 +1,10 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-
-const User = sequelize.define('user', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    email: { type: DataTypes.STRING, allowNull: false },
-    username: { type: DataTypes.STRING, allowNull: false, unique: true },
-    first_name: { type: DataTypes.STRING, allowNull: true },
-    last_name: { type: DataTypes.STRING, allowNull: true },
-}, {
-    tableName: 'users',
-    timestamps: true,
-});
+const db = require('../config/database');
+const User = {
+  create: (data, trx = null) => (trx ? db('users').transacting(trx).insert(data).returning('*') : db('users').insert(data).returning('*')),
+  findAll: () => db('users').select('*'),
+  findById: (id) => db('users').where({ id }).first(),
+  update: (id, data, trx = null) => (trx ? db('users').where({ id }).transacting(trx).update(data).returning('*') : db('users').where({ id }).update(data).returning('*')),
+  delete: (id) => db('users').where({ id }).del(),
+};
 
 module.exports = User;
