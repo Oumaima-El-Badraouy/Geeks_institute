@@ -1,0 +1,8 @@
+{
+  "SocialMedias": ["Facebook", "Twitter", "LinkedIn", "Instagram"],
+  "Skills": ["React", "Node.js", "Express", "MongoDB"],
+  "Experiences": [
+    { "id": 1, "title": "Frontend Developer", "company": "TechCorp" },
+    { "id": 2, "title": "Backend Developer", "company": "CodeWorks" }
+  ]
+}
