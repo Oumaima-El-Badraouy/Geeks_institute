@@ -13,7 +13,6 @@ export default function FormComponent({ formData, handleChange, handleSubmit }) 
         />
       </label>
       <br />
-
       <label>
         Last Name:
         <input
