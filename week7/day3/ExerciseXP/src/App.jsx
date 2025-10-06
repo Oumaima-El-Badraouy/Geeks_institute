@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import React from "react";
+import BuggyCounter from "./BuggyCounter";
+import ErrorBoundary from "./ErrorBoundary";
+import FavoriteColor from "./FavoriteColor";
+import LifecycleUnmount from "./LifecycleUnmount";
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Simulation 1: Both counters in one ErrorBoundary</h2>
+      <ErrorBoundary>
+        <BuggyCounter />
+        <BuggyCounter />
+      </ErrorBoundary>
+      <h2>Simulation 2: Each counter has its own ErrorBoundary</h2>
+      <ErrorBoundary>
+        <BuggyCounter />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <BuggyCounter />
+      </ErrorBoundary>
 
-export default App
+      <h2>Simulation 3: Without ErrorBoundary (will crash the app)</h2>
+      <BuggyCounter />
+       <div>
+      <FavoriteColor />
+    </div>
+     <div>
+      <LifecycleUnmount />
+    </div>
+    </div>
+  );
+}
