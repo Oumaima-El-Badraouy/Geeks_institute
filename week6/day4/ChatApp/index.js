@@ -8,7 +8,7 @@ const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, "public")));
 const PORT = process.env.PORT || 3000;
-const rooms = {}; // { roomName: { users: { socketId: {username}}, history: [{...}] } }
+const rooms = {}; 
 const HISTORY_LIMIT = 50;
 
 function ensureRoom(room) {
@@ -54,8 +54,6 @@ io.on("connection", (socket) => {
     if (rooms[room].history.length > HISTORY_LIMIT) rooms[room].history.shift();
     io.to(room).emit("message", payload);
   });
-
-  // change status / update profile optional
   socket.on("updateProfile", ({ room, username }) => {
     if (room && rooms[room] && rooms[room].users[socket.id]) {
       rooms[room].users[socket.id].username = username;
@@ -64,8 +62,6 @@ io.on("connection", (socket) => {
       });
     }
   });
-
-  // typing indicator (optional)
   socket.on("typing", ({ room, typing }) => {
     socket.to(room).emit("typing", {
       username: rooms[room]?.users[socket.id]?.username || "Someone",
@@ -74,7 +70,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    // remove from all rooms
     for (const roomName of Object.keys(rooms)) {
       const room = rooms[roomName];
       if (room.users[socket.id]) {
@@ -91,7 +86,6 @@ io.on("connection", (socket) => {
         });
         console.log(`${username} disconnected from ${roomName}`);
       }
-      // optional: clean empty room
       if (Object.keys(room.users).length === 0 && room.history.length === 0) {
         delete rooms[roomName];
       }

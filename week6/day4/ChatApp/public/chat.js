@@ -1,7 +1,4 @@
-// public/chat.js
 const socket = io();
-
-// DOM
 const entry = document.getElementById("entry");
 const usernameInput = document.getElementById("username");
 const roomInput = document.getElementById("room");
@@ -16,23 +13,17 @@ const msgInput = document.getElementById("msgInput");
 const sendBtn = document.getElementById("sendBtn");
 const leaveBtn = document.getElementById("leaveBtn");
 const typingEl = document.getElementById("typing");
-
-// state
 let currentRoom = null;
 let currentUser = null;
 let focused = true;
 let origTitle = document.title;
 let notifTimer = null;
-
-// focus tracking
 window.addEventListener("focus", () => {
   focused = true;
   document.title = origTitle;
   if (notifTimer) { clearInterval(notifTimer); notifTimer = null; }
 });
 window.addEventListener("blur", () => focused = false);
-
-// helpers
 function el(tag, cls) {
   const e = document.createElement(tag);
   if (cls) e.className = cls;
@@ -57,20 +48,16 @@ function appendMessage(m) {
   }
   messagesEl.appendChild(row);
   messagesEl.scrollTop = messagesEl.scrollHeight;
-
-  // notify if not focused and incoming message not from me
   if (!focused && !m.system && m.username !== currentUser) {
     notifyNewMessage(m);
   }
 }
-
 function notifyNewMessage(m) {
   // sound beep
   try {
     const audio = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=");
     audio.play().catch(()=>{});
   } catch (e) {}
-
   let visible = true;
   document.title = `Nouveau message • ${m.username}`;
   if (notifTimer) clearInterval(notifTimer);
@@ -79,55 +66,40 @@ function notifyNewMessage(m) {
     visible = !visible;
   }, 1200);
 }
-
-// join
 joinBtn.addEventListener("click", () => {
   const username = usernameInput.value.trim() || "Anon";
   const room = roomInput.value.trim() || "general";
   currentUser = username;
   currentRoom = room;
-
   socket.emit("joinRoom", { username, room });
-
-  // show chat screen
   entry.classList.add("hidden");
   chatScreen.classList.remove("hidden");
   roomNameEl.textContent = room;
   hdrRoom.textContent = `Salle: ${room}`;
   messagesEl.innerHTML = "";
 });
-
-// send
 sendBtn.addEventListener("click", sendMessage);
 msgInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") { sendMessage(); }
-  // typing indicator
   socket.emit("typing", { room: currentRoom, typing: true });
   setTimeout(() => socket.emit("typing", { room: currentRoom, typing: false }), 700);
 });
-
 function sendMessage() {
   const text = msgInput.value.trim();
   if (!text) return;
   socket.emit("chatMessage", { room: currentRoom, text });
   msgInput.value = "";
 }
-
-// leave
 leaveBtn.addEventListener("click", () => {
-  location.reload(); // simple approach for demo
+  location.reload(); 
 });
-
-// socket handlers
 socket.on("roomHistory", (history) => {
   messagesEl.innerHTML = "";
   history.forEach((m) => appendMessage(m));
 });
-
 socket.on("message", (m) => {
   appendMessage(m);
 });
-
 socket.on("roomUsers", ({ users }) => {
   usersList.innerHTML = "";
   users.forEach((u) => {
@@ -136,7 +108,6 @@ socket.on("roomUsers", ({ users }) => {
     usersList.appendChild(li);
   });
 });
-
 socket.on("typing", ({ username, typing }) => {
   typingEl.textContent = typing ? `${username} est en train d'écrire...` : "";
 });

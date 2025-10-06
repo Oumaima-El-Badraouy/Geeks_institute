@@ -6,21 +6,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
 const users = {};
 const games = {};
-
 const GRID_SIZE = 10;
-
 function createEmptyGrid() {
   return Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(0));
 }
-
 function createGame(playerA, playerB = null) {
   const id = uuidv4();
   const grid = createEmptyGrid();
-
-  // obstacles
   const obstacles = [
     [2, 2], [2, 3], [3, 2],
     [6, 6], [6, 5], [5, 6], [4, 7]
@@ -28,7 +22,6 @@ function createGame(playerA, playerB = null) {
   obstacles.forEach(([r, c]) => {
     if (r >= 0 && r < GRID_SIZE && c >= 0 && c < GRID_SIZE) grid[r][c] = 1;
   });
-
   const baseA = { r: 0, c: 0 };
   const baseB = { r: GRID_SIZE - 1, c: GRID_SIZE - 1 };
 
@@ -44,7 +37,6 @@ function createGame(playerA, playerB = null) {
     turn: 'A',
     winner: null,
   };
-
   games[id] = game;
   return game;
 }
