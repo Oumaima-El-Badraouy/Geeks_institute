@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Ex1 from "./ex1.jsx";
 import { Context } from "./Context.js";
+import CharCounter from './CharCounter.jsx'
 
 export default function App() {
   const [Mode, setMode] = useState({
@@ -11,10 +12,13 @@ export default function App() {
   });
 
   return (
+    <>
     <Context.Provider value={{ Mode, setMode }}>
       <div style={{ height: "100vh",width: "1000vh", ...Mode }}>
         <Ex1 />
       </div>
     </Context.Provider>
+      <CharCounter />
+      </>
   );
 }
