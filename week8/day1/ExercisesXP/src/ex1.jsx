@@ -1,16 +1,20 @@
-import React from 'react'
-import {Context} from './App.jsx';
-import { useContext } from 'react';
+import React, { useContext } from "react";
+import { Context } from "./Context.js";
 export default function Ex1() {
-    const {Mode, setMode} = useContext(Context);
-
-    function handleClick(e) {
-        e.preventDefault();
-        setMode({ backgroundColor: "black", color: "white" });
+  const { Mode, setMode } = useContext(Context);
+  function handleClick(e) {
+    e.preventDefault();
+    if (Mode.backgroundColor === "white") {
+      setMode({ backgroundColor: "black", color: "white", name: "Dark Mode" });
+    } else {
+      setMode({ backgroundColor: "white", color: "black", name: "Light Mode" });
     }
-    return (
-        <div>
-            <button onClick={handleClick} style={Mode}>Light Mode</button>
-        </div>
-    )
+  }
+  return (
+    <div style={Mode}>
+      <button onClick={handleClick} >
+        {Mode.name}
+      </button>
+    </div>
+  );
 }
