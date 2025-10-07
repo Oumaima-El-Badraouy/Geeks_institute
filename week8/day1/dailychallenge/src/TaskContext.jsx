@@ -1,23 +1,37 @@
 import React, { createContext, useReducer } from "react";
+
 export const TaskContext = createContext();
 function taskReducer(state, action) {
   switch (action.type) {
     case "ADD_TASK":
-      return [...state, { id: Date.now(), text: action.payload, completed: false }];
+      return { ...state, tasks: [...state.tasks, { id: Date.now(), text: action.payload, completed: false }] };
     case "TOGGLE_TASK":
-      return state.map(task =>
-        task.id === action.payload ? { ...task, completed: !task.completed } : task
-      );
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.payload ? { ...task, completed: !task.completed } : task
+        ),
+      };
     case "REMOVE_TASK":
-      return state.filter(task => task.id !== action.payload);
+      return { ...state, tasks: state.tasks.filter(task => task.id !== action.payload) };
+    case "EDIT_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.payload.id ? { ...task, text: action.payload.text } : task
+        ),
+      };
+    case "FILTER_TASKS":
+      return { ...state, filter: action.payload };
     default:
       return state;
   }
 }
+const initialState = { tasks: [], filter: "all" };
 export function TaskProvider({ children }) {
-  const [tasks, dispatch] = useReducer(taskReducer, []);
+  const [state, dispatch] = useReducer(taskReducer, initialState);
   return (
-    <TaskContext.Provider value={{ tasks, dispatch }}>
+    <TaskContext.Provider value={{ state, dispatch }}>
       {children}
     </TaskContext.Provider>
   );

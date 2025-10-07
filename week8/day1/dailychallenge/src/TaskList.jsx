@@ -1,14 +1,24 @@
 import React, { useContext } from "react";
-import { TaskContext } from "./TaskContext";
+import { TaskContext } from "../context/TaskContext";
 import TaskItem from "./TaskItem";
 export default function TaskList() {
-  const { tasks } = useContext(TaskContext);
-  if (tasks.length === 0) return <p>Aucune tâche pour le moment.</p>;
+  const { state, dispatch } = useContext(TaskContext);
+  const { tasks, filter } = state;
+  const filteredTasks = tasks.filter(task => {
+    if (filter === "completed") return task.completed;
+    if (filter === "active") return !task.completed;
+    return true; 
+  });
   return (
-    <ul style={{ listStyle: "none", padding: 0 }}>
-      {tasks.map(task => (
-        <TaskItem key={task.id} task={task} />
-      ))}
-    </ul>
+    <div>
+      <div style={{ marginBottom: "10px" }}>
+        <button onClick={() => dispatch({ type: "FILTER_TASKS", payload: "all" })}>All</button>
+        <button onClick={() => dispatch({ type: "FILTER_TASKS", payload: "active" })} style={{ marginLeft: "5px" }}>Active</button>
+        <button onClick={() => dispatch({ type: "FILTER_TASKS", payload: "completed" })} style={{ marginLeft: "5px" }}>Completed</button>
+      </div>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {filteredTasks.length === 0 ? <p>Aucune tâche</p> : filteredTasks.map(task => <TaskItem key={task.id} task={task} />)}
+      </ul>
+    </div>
   );
 }
