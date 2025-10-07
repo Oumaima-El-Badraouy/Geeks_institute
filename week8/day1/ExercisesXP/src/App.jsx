@@ -1,16 +1,13 @@
-// App.jsx
 import React, { useState } from "react";
 import Ex1 from "./ex1.jsx";
 import { Context } from "./Context.js";
 import CharCounter from './CharCounter.jsx'
-
 export default function App() {
   const [Mode, setMode] = useState({
     backgroundColor: "white",
     color: "black",
     name: "Light Mode",
   });
-
   return (
     <>
     <Context.Provider value={{ Mode, setMode }}>
