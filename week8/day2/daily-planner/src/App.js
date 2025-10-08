@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useState } from "react";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import DatePicker from "./components/DatePicker";
+import AddTaskForm from "./components/AddTaskForm";
+import TaskList from "./components/TaskList";
+export default function App() {
+  const [selectedDay, setSelectedDay] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="max-w-lg mx-auto mt-10 p-4 border rounded shadow">
+        <h1 className="text-2xl font-bold mb-4 text-center">Daily Planner</h1>
+        <DatePicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+        <AddTaskForm selectedDay={selectedDay} />
+        <TaskList selectedDay={selectedDay} />
+      </div>
+    </Provider>
   );
 }
-
-export default App;
