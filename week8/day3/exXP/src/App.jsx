@@ -13,14 +13,7 @@ function App() {
         justifyContent: "center",
         alignItems: "flex-start",
         paddingTop: "50px",
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-      }}
-    >
-      <div
-        style={{
-          background: "#fff",
-          padding: "30px",
-          borderRadius: "12px",
+           borderRadius: "12px",
           boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
           width: "400px",
         }}
@@ -29,7 +22,7 @@ function App() {
         <AddTodo />
         <TodoList />
       </div>
-    </div>
+
   );
 }
 
