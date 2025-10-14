@@ -12,8 +12,6 @@ export default function App() {
   });
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
-
-    // On met à jour dynamiquement la valeur correspondante dans l'état
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
